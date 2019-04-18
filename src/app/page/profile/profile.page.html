@@ -1,0 +1,134 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/tabs"></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+
+      <ion-button (click)="edit()" *ngIf="!editMode">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="save()" *ngIf="editMode">
+          <ion-icon name="save"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="presentPopover()">
+        <ion-icon name="more" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div id="adjustment-container">
+    <div id="adjustment"></div>
+    
+
+    <div id="avatar-container">
+      <ion-avatar slot="start" id="avatar" (click)="profileImageSetter($event)">
+        <img  src="{{profilePic}}" />
+      </ion-avatar>
+    </div>
+  </div>
+
+  <ion-card id="profile" align-items-center>
+    <ion-card-content id="profile-card-content">
+      <ion-item lines="none">
+        <ion-grid>
+          <ion-row>
+            <ion-col text-center>
+                <ion-text text-center>Register ID:{{doctor.id}}</ion-text>
+            </ion-col>
+          </ion-row>
+         
+          <ion-row>
+            <ion-col>
+              <ion-label text-center id="name" *ngIf="!editMode">{{doctor.name}}</ion-label>
+              <ion-item *ngIf="editMode" >
+                  <ion-input form="profileForm" text-center type="text" value="{{doctor.name}}" required></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col text-center class="flex-box">
+              <ion-label *ngIf="!editMode">{{doctor.speciality}}</ion-label>
+              <ion-item *ngIf="editMode">
+                  <ion-input form="profileForm" text-center type="text" value="{{doctor.speciality}}"  required></ion-input>
+              </ion-item >
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </ion-item>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col text-center class="flex-box">
+            <ion-icon name="phone-portrait"></ion-icon>
+            <ion-label *ngIf="!editMode">{{doctor.number}}</ion-label>
+            <ion-item *ngIf="editMode">
+                <ion-input form="profileForm" text-center type="text" value="{{doctor.number}}" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col text-center class="flex-box">
+            <ion-icon name="mail"></ion-icon>
+            <ion-label *ngIf="!editMode">{{doctor.email}}</ion-label>
+            <ion-item *ngIf="editMode">
+                <ion-input form="profileForm" text-center type="text" value="{{doctor.email}}"  required></ion-input>
+            </ion-item >
+          </ion-col>
+        </ion-row>
+
+    
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="detail-card">
+    <ion-card-content>
+      <ion-badge (click)="clinicShow($event)" color="secondary" *ngFor="let clinic of doctor.clinic">{{clinic}}
+          <ion-icon (click)="removeClinic($event)" name="close"></ion-icon>
+      </ion-badge>
+      <ion-label float-right class="add-button">
+          <ion-icon name="add" (click)="clinicShow($event)"></ion-icon>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card class="detail-card">
+    <ion-card-content>
+      <ion-badge  color="primary" *ngFor="let degree of doctor.degree">{{degree}}
+          <ion-icon (click)="removeDegree($event)" name="close"></ion-icon>
+      </ion-badge>
+
+      <ion-label float-right class="add-button">
+          <ion-icon name="add"  (click)="degreeShow($event)"></ion-icon>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>
+
+<div class="ratingBox" (click)="reviewPage()">
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col size="6">
+      
+        <app-rating [(rating)]="doctor.rating"></app-rating>
+        
+      </ion-col>
+      <ion-col size="6">
+        Reviews(98)
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</div>

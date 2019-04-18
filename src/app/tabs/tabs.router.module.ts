@@ -7,45 +7,47 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
+      // {
+      //   path: 'appointments',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: '../page/appointments/appointments.module#AppointmentsPageModule'
+      //     }
+      //   ]
+      // },
       {
-        path: 'tab1',
+        path: 'dashboard',
         children: [
           {
             path: '',
-            loadChildren: '../tab1/tab1.module#Tab1PageModule'
+            loadChildren: '../page/dashboard/dashboard.module#DashboardPageModule'
           }
         ]
       },
-      {
-        path: 'tab2',
-        children: [
-          {
-            path: '',
-            loadChildren: '../tab2/tab2.module#Tab2PageModule'
-          }
-        ]
-      },
-      {
-        path: 'tab3',
-        children: [
-          {
-            path: '',
-            loadChildren: '../tab3/tab3.module#Tab3PageModule'
-          }
-        ]
-      },
+      // {
+      //   path: 'patients',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: '../page/patients/patients.module#PatientsPageModule'
+      //     }
+      //   ]
+      // },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/home/tabs/dashboard',
         pathMatch: 'full'
       }
-    ]
+    ], 
   },
+
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/home/tabs/dashboard',
     pathMatch: 'full'
   }
+
 ];
 
 @NgModule({

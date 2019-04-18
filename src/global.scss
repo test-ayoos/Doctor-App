@@ -9,3 +9,68 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+
+app-input-dropdown {
+    width: 100%;
+}
+
+.prescription-modal {
+
+    width: 95%;
+    height: 300px;
+    top: 50%;
+}
+
+ion-modal.auto-height {
+    &.bottom {
+        align-items: flex-end;
+    }
+
+    --height: 300px;;
+
+    .modal-wrapper {
+
+        position: absolute;
+        bottom: 0%;
+    }
+
+    .ion-page {
+        position: relative;
+        display: block;
+        contain: content;
+
+        .inner-content {
+            max-height: 80vh;
+            overflow: auto;
+            padding: 10px;
+        }
+    }
+}
+
+
+ion-modal.auto-height2 {
+    &.bottom {
+        align-items: flex-end;
+    }
+
+    --height: 51vw;;
+
+    .modal-wrapper {
+
+        position: absolute;
+        bottom: 0%;
+    }
+
+    .ion-page {
+        position: relative;
+        display: block;
+        contain: content;
+
+        .inner-content {
+            max-height: 80vh;
+            overflow: auto;
+            padding: 10px;
+        }
+    }
+}

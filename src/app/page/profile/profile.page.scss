@@ -1,0 +1,108 @@
+#avatar {
+    margin: auto;
+    border-radius: 50%;
+    // border: 5px solid white;
+    background:rgba(0, 50, 189, 0);
+    width: 200px;
+    height: 200px;
+    // box-shadow:3px 3px 5px 0px #2c2a2a;
+}
+
+#profile {
+    box-shadow: none;    
+}
+#avatar-container {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+
+}
+
+ion-toolbar {
+    --background:#275ae7;
+}
+
+ion-item {
+    --background:transparent;
+}
+
+ion-content {
+
+    border:0px;
+}
+
+ion-label {
+    --white-space: normal;
+}
+
+ion-badge {
+    margin: 5px;
+}
+
+ion-button ion-icon , ion-back-button{
+
+    color: white;
+}
+
+#adjustment {
+
+  
+    background: transparent;
+    border: 200px solid #275ae7;
+    width: 100vw;
+    height: 0px;
+    // border-left: 30020px solid transparent;
+    // border-bottom: 200px  solid transparent;
+    position: absolute;
+    /* left: 0px; */
+    // right: 0px;
+    top:-25vh;
+    box-shadow: none;
+
+  }
+
+  
+  #adjustment-container {
+
+    height: 300px;
+    width: 100%;
+    margin-bottom: -20px;
+  }
+
+  .cl-white {
+      color:white;
+  }
+
+  .detail-card {
+      margin:0px;
+      margin-bottom: 10px;
+      border-bottom:1px solid #dedede;
+      box-shadow:none;
+      border-radius:0px;
+  }
+
+  .flex-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+  }
+
+  ion-icon[name="mail"] , ion-icon[name="phone-portrait"]
+  {
+      margin-right:5px;
+  }
+
+  .add-button {
+      font-size: 30px;
+  }
+
+  .ratingBox {
+    width: 100%;
+    bottom: 0px;
+    z-index: 30000;
+    background: #275ae7;
+    color: white;
+  }
+
+  

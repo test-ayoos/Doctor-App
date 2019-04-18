@@ -1,0 +1,12 @@
+<div class="input-dropdown-container">
+    <div #badgeContainer id="badgeContainer">
+      
+    </div>
+    
+    <input #input type="text" name="myCountry" placeholder="{{placeholder}}" (input)="autocomplete($event)" [(ngModel)]="value"/>
+
+
+</div>
+<div tabindex="9" #inputContainer class="autocomplete">
+    
+</div>
