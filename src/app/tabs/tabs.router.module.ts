@@ -7,15 +7,15 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
-      // {
-      //   path: 'appointments',
-      //   children: [
-      //     {
-      //       path: '',
-      //       loadChildren: '../page/appointments/appointments.module#AppointmentsPageModule'
-      //     }
-      //   ]
-      // },
+      {
+        path: 'appointments',
+        children: [
+          {
+            path: '',
+            loadChildren: '../page/appointments/appointments.module#AppointmentsPageModule'
+          }
+        ]
+      },
       {
         path: 'dashboard',
         children: [
