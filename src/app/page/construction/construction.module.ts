@@ -1,4 +1,3 @@
-import { SharedModule } from './../../shared/component/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ReviewPage } from './review.page';
+import { ConstructionPage } from './construction.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ReviewPage
+    component: ConstructionPage
   }
 ];
 
@@ -20,9 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ReviewPage]
+  declarations: [ConstructionPage]
 })
-export class ReviewPageModule {}
+export class ConstructionPageModule {}

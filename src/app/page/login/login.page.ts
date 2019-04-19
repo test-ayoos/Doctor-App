@@ -22,9 +22,9 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // // if (this.oauthService.hasValidAccessToken()) {
-    //   this.navCtrl.navigateRoot(this.successPage);
-    // }
+   if (this.oauthService.hasValidAccessToken()) {
+      this.navCtrl.navigateRoot(this.successPage);
+    }
   }
 
   clearMessage() {
@@ -37,22 +37,22 @@ export class LoginPage implements OnInit {
 
   login() {
 
-  //   this.oauthService.fetchTokenUsingPasswordFlowAndLoadUserProfile(this.username, this.password, new HttpHeaders()).then(() => {
+    this.oauthService.fetchTokenUsingPasswordFlowAndLoadUserProfile(this.username, this.password, new HttpHeaders()).then(() => {
  
-  //     let claims = this.oauthService.getIdentityClaims();
+      let claims = this.oauthService.getIdentityClaims();
  
-  //     if (claims) console.log(claims);
+      if (claims) console.log(claims);
  
-  //     if (this.oauthService.hasValidAccessToken()) {
-  //       this.navCtrl.navigateRoot(this.successPage);
-  //     }
-  //   }).catch((err:HttpErrorResponse)=>{
+      if (this.oauthService.hasValidAccessToken()) {
+        this.navCtrl.navigateRoot(this.successPage);
+      }
+    }).catch((err:HttpErrorResponse)=>{
 
-  //     this.message=err.error.error_description;
+      this.message=err.error.error_description;
 
-  //   });
-//   // }
+    });
 
-this.navCtrl.navigateRoot(this.successPage);
-  }
+    this.navCtrl.navigateRoot(this.successPage);
+
+   }
 }

@@ -1,0 +1,101 @@
+
+ion-button ion-icon {
+
+    font-size: 2rem;
+    color:#eeeeee;
+
+}
+.inner-scroll {
+    padding:2px;
+}
+
+ion-card  {
+    margin-left:8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    box-shadow: none;
+    border-radius: 0;
+    background: white;
+
+}
+ion-list {
+    width: 100%;
+    margin-bottom:0px;
+}
+ion-avatar {
+    width:60px;
+    height:60px;
+}
+  
+ion-toolbar {
+  
+    --background:#275ae7; //#2f847c;
+
+    
+  }
+  
+  .time {
+    font-size:10px;
+}
+
+.name {
+    font-size: 16px;
+}
+
+.icon-large {
+    font-size: 30px;
+}
+
+.ap-card {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 6px;
+    border-left:3px solid green;
+}
+p {
+  margin: 4px;
+}
+
+.today {
+    border-left:3px solid orangered;
+}
+
+.yesterday {
+    border-left:3px solid #42858C;
+}
+
+.otherDay {
+    border-left:3px solid rgb(133, 175, 133);
+}
+.age {
+    font-size: 14px;
+    color: grey;
+}
+
+.bg-grey {
+   --background:#f2eded;
+   background: #f2eded;
+}
+
+.cl-white {
+    color: white;
+}
+
+.cl-orange {
+
+    color:orange;
+}
+
+.border-left {
+    border-left: 1px solid #c9bebe;
+}
+
+.icon-small {
+
+    font-size:28px;
+}
+
+.confirm {
+    border-left: 4px solid #54b265;
+
+}

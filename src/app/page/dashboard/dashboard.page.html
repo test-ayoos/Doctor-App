@@ -40,7 +40,7 @@
         </ion-card>
       </ion-col>
 
-      <ion-col col-6 (click)="goto('visit')">
+      <ion-col col-6 (click)="goto('construction')">
         <ion-card text-center padding>
           <ion-icon name="eye"></ion-icon>
           <h6>Visits</h6>
@@ -49,19 +49,30 @@
     </ion-row>
 
     <ion-row>
-        <ion-col col-6 (click)="goto('patient')">
+        <ion-col col-6 (click)="goto('construction')">
           <ion-card text-center padding >
               <ion-icon name="person"></ion-icon>
               <h6>Patients</h6>
           </ion-card>
         </ion-col>
   
-        <ion-col col-6>
+        <ion-col col-6 (click)="goto('construction')">
           <ion-card text-center padding>
               <ion-icon name="flash"></ion-icon>
             <h6>Reports</h6>
           </ion-card>
         </ion-col>
+      </ion-row>
+
+      <ion-row>
+
+        <ion-col col-12 (click)="goto('review')">
+            <ion-card text-center padding>
+                <ion-icon src="/assets/feedback.svg"></ion-icon>
+              <h6>Feedback / Review</h6>
+            </ion-card>
+        </ion-col>
+
       </ion-row>
       
   </ion-grid>

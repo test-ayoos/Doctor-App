@@ -1,0 +1,164 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()" #backButton>
+        <ion-icon name="return-left"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="history()">
+        <ion-icon name="filing"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="share"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+
+ 
+  <ion-slides #slides>
+    <!--Medical Summary SLide-->
+
+    <ion-slide>
+
+      <ion-grid no-padding>
+        <ion-row justify-content-center no-margin>
+          <ion-col no-padding>
+            <ion-item lines="none" class="bd-top-btm">
+              <ion-icon src="/assets/stethscope.svg"> </ion-icon>
+
+              <ion-label margin>Medical Summary</ion-label>
+
+              <div id="btn-container" (click)="next()">
+                <div id="save-btn">
+                  <ion-button>Save</ion-button>
+                </div>
+                <div id="skip-btn" (click)="next()">
+                  <ion-button>Skip</ion-button>
+                </div>
+              </div>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center>
+
+          <ion-col size="10" align-self-center>
+            <ion-item>
+              <ion-input
+                type="number"
+                placeholder="Blood Pressure (BP)"
+                ngModel
+                required
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                type="number"
+                placeholder="Weight"
+                ngModel
+                required
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                type="number"
+                placeholder="Height"
+                ngModel
+                required
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                type="number"
+                placeholder="Temperature"
+                ngModel
+                required
+              ></ion-input>
+            </ion-item>
+
+            <app-input-dropdown placeholder="Diagnosis" [options]='options'></app-input-dropdown>
+
+            <app-input-dropdown placeholder="Symptoms" [options]='options'></app-input-dropdown>
+
+            <ion-input autocomplete="on"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row justify-content-center>
+          <ion-col class="flex-box">
+            <ion-item lines="none">
+              <ion-checkbox color="primary" marginRight></ion-checkbox>
+              <ion-label class="mg-l">
+                <p style="font-size:12px">
+                  Have done paramedical Examination Before ?
+                </p>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <!--Prescription Slide-->
+    <ion-slide>
+      <ion-grid no-padding>
+        <ion-item lines="none" class="bd-top-btm" no-margin>
+          <ion-icon src="/assets/prescription.svg"> </ion-icon>
+
+          <ion-label margin>Prescription</ion-label>
+          <div id="btn-container">
+            <div id="save-btn">
+              <ion-button>Save</ion-button>
+            </div>
+            <div id="skip-btn">
+              <ion-button>Print</ion-button>
+            </div>
+          </div>
+        </ion-item>
+
+        <ion-button (click)="create()" expand="full" primary style="background:blue;margin:10px;">
+          Add
+        </ion-button>
+
+        <ion-grid id="AddMedicine">
+      
+
+          <ion-row justify-content-center margin>
+            <ion-col>
+              <ion-buttons justify-content-center>
+                <ion-button color="primary" (click)="next()">Add</ion-button>
+              </ion-buttons>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-grid no-padding  class="bg-grey">
+          <ion-row>
+            <ion-col size-md="4" size="6" *ngFor="let med of medicines">
+              <ion-card class="bg-white">
+                <ion-card-content>
+                  <ion-icon class="cl-warning" name="close-circle" float-left (click)="removeMedicine(med)"></ion-icon>
+                  <ion-label>{{med.type}}</ion-label>
+                  <ion-icon class="cl-primary" name="create" float-right></ion-icon>
+                  <ion-grid>
+                    <ion-row>{{med.name}}</ion-row>
+                    <ion-row>{{med.strength}}</ion-row>
+                    <ion-row>{{med.dose}}</ion-row>
+                    <ion-row>{{med.duration}}</ion-row>
+                  </ion-grid>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+
+
+</ion-content>

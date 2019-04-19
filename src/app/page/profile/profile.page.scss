@@ -47,16 +47,27 @@ ion-button ion-icon , ion-back-button{
 #adjustment {
 
   
-    background: transparent;
-    border: 200px solid #275ae7;
-    width: 100vw;
-    height: 0px;
+    // background: transparent;
+    // // border: 200px solid #275ae7;
+    // width: 0px;
+    // height: 0px;
     // border-left: 30020px solid transparent;
     // border-bottom: 200px  solid transparent;
+    // position: absolute;
+    // /* left: 0px; */
+    // // right: 0px;
+    // top:-25vh;
+    // box-shadow: none;
+
+      
+    background: transparent;
+    border: 200px solid #275ae7;
+    width: 0px;
+    height: 0px;
+    border-left: 30020px solid transparent;
+    border-bottom: 200px  solid transparent;
     position: absolute;
-    /* left: 0px; */
-    // right: 0px;
-    top:-25vh;
+    right: 0px;
     box-shadow: none;
 
   }

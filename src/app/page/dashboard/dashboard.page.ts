@@ -2,8 +2,6 @@ import { NotificationPage } from './../notification/notification.page';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from '@ionic/angular';
-import { Doctor } from 'src/app/shared/models/doctor';
-
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +10,9 @@ import { Doctor } from 'src/app/shared/models/doctor';
 })
 export class DashboardPage implements OnInit {
 
-  doctor: Doctor;
+  doctor;
+
+  username: String;
 
   constructor(
     public navCtrl: NavController,
@@ -26,7 +26,7 @@ export class DashboardPage implements OnInit {
     this.authService.loadUserProfile().then(
       (res) =>
       {
-        this.doctor = <Doctor> res;
+   
       }
     );
   }

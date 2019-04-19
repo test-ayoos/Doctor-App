@@ -1,0 +1,157 @@
+.vertical-align-content 
+{
+     display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
+     height: 100%;
+}
+
+.flex-box {
+     display: flex;
+     justify-content: center;
+}
+
+.mg-l {
+     margin-left:5px;
+}
+
+div.data-list-input
+{
+    position: relative;
+    height: 20px;
+    display: inline-flex;
+    padding: 5px 0 5px 0;
+}
+select.data-list-input
+{
+    position: absolute;
+    top: 5px;
+    left: 0px;
+    height: 20px;
+}
+input.data-list-input
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 20px;
+}
+ion-label 
+{
+  --color:grey;
+}
+#adjustment {
+
+  
+     background: transparent;
+     border: 25px solid transparent;
+     width: 0px;
+     height: 0px;
+     border-right: 25px solid rgba(237, 237, 237, 0.75);
+     border-bottom: 25px solid rgba(237, 237, 237, 0.75);
+     position: fixed;
+     /* left: 0px; */
+     right: 0px;
+     bottom: 0px;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     z-index: 10000;
+     border-top-left-radius:13px;
+ 
+   }
+
+ion-item {
+     margin-bottom: 20px;
+}
+
+.bg-white {
+     background:white;
+}
+
+.bg-blue {
+     background: #275ae7;
+}
+
+ion-content {
+     --background:#f2eded;
+}
+
+ion-slide {
+     background: white;
+}
+
+.bd-top-btm {
+
+    border-top: 1px solid #da7e7e;
+    border-bottom: 1px solid #00bcd4;
+
+}
+
+#save-btn {
+     display: inline-block;
+    background: #da7e7e;
+    border-bottom-left-radius: 10px;
+    margin: 0px;
+    border-top-left-radius: 10px;
+    border-right: 1px solid white;
+
+}
+
+#skip-btn {
+     display: inline-block;
+     margin: 0px;
+     border-top-right-radius: 10px;
+     background: #00BCD4;
+     border-left: 1px solid white;
+     border-bottom-right-radius: 10px;
+ 
+}
+
+ion-button {
+     --background: transparent;
+     --box-shadow: none;
+     border:0px;
+}
+
+ion-slides {
+     overflow-y: hidden;
+     height: 100%;
+}
+
+ion-slide {
+   
+     overflow-y: scroll;
+}
+
+ion-slide ion-grid {
+     height: 100%;
+}
+
+.bg-grey {
+     background: #f2eded;
+}
+
+#AddMedicine {
+
+    border: 1px solid black;
+    margin: 20px;
+    position: absolute;
+    top: -1px;
+    height: 400px;
+    background: white;
+    padding: 10px;
+    align-self: center;
+    display: none;
+
+}
+
+.cl-warning {
+     color:orangered;
+}
+
+.cl-primary {
+     color:blue;
+}
+
+ion-col {
+     padding: 0px;
+}

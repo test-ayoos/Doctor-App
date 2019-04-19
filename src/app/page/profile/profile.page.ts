@@ -6,7 +6,6 @@ import { async } from '@angular/core/testing';
 import { ClinicPage } from './../clinic/clinic.page';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, ModalController, PopoverController } from '@ionic/angular';
-import { Doctor } from 'src/app/shared/models/doctor';
 
 @Component({
   selector: 'app-profile',

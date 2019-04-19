@@ -1,22 +1,113 @@
 <ion-header>
+
   <ion-toolbar>
-    <ion-title>Reviews</ion-title>
+    <ion-buttons>
+      <ion-button (click)="goPrevious()">
+          <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+      <ion-title>Feedback</ion-title>
+    </ion-buttons>
+    
   </ion-toolbar>
+  
 </ion-header>
+<ion-content>
 
-<ion-content [@slideInOut]>
 
-  <ion-grid>
-    <ion-row>
-      Show the rating
-    </ion-row>
-    <ion-row>
-      <ion-col>
+  <ion-infinite-scroll>
+      <ion-infinite-scroll-content>
 
-        
+        <ion-grid>
+            <ion-row>
+                <ion-col text-left >
+                  <h5>Rating</h5>
+                </ion-col>
+              </ion-row>
 
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+          <ion-row>
+
+            <ion-col size="4">
+              <h2>2.5</h2>
+              <app-rating [rating]="2"></app-rating>
+              <p id="ratingText">Average Rating</p>
+            </ion-col>
+            <ion-col >
+
+              <ion-grid>
+                  <ion-row *ngFor="let a of [1,2,3,4,5]">
+                    <ion-col col-6>
+                        <div id="progressbar">
+                            <div [ngStyle]="{'width': a * 10 + '%'}"></div>
+                          </div>
+          
+                    </ion-col>
+                    <ion-col>
+                        <app-rating [rating]=a></app-rating>
+                      
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+  
+            </ion-col >
+
+          </ion-row>
+
+        </ion-grid>
+
+
+        <ion-grid id="reviewGrid">
+
+          <ion-row>
+            <ion-col text-left col-3>
+              <h5>Reviews</h5>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngFor="let a of [1,2,3,4,5]" class="reviewBox">
+
+            <ion-col size="2" class="imgBox">
+              <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-avatar>
+                          <img src="/assets/boy.png"/>
+                        </ion-avatar>
+                      </ion-col>
+                  
+                </ion-row>
+              </ion-grid>
+            </ion-col>
+
+            <ion-col>
+                <ion-grid>
+
+                    <ion-row>
+                      <ion-col class="name">Jishnu J <p class="date">{{a}} Days Ago</p></ion-col>
+                    </ion-row>
+    
+                    <ion-row>
+                      <ion-col text-left>
+                        <app-rating [rating]="3"></app-rating>
+                      </ion-col>
+                    </ion-row>
+    
+                    <ion-row>
+                      <ion-col  text-left>
+                        <ion-label>Please help me out. i have two screen . when i go from first screen to next screen. in next screen i have one button called back. When i press that i should be back to first screen. how to so that ?</ion-label>
+                      </ion-col>
+                    </ion-row>
+    
+                  </ion-grid>
+         
+    
+            </ion-col>
+              
+
+          </ion-row>
+
+        </ion-grid>
+
+    </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 </ion-content>

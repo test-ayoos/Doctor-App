@@ -1,4 +1,4 @@
-import { SharedModule } from './../../shared/component/shared.module';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,12 +6,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ReviewPage } from './review.page';
+import { ConsultationPage } from './consultation.page';
+import { SharedModule } from 'src/app/shared/component/shared.module';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: ReviewPage
+    component: ConsultationPage
   }
 ];
 
@@ -21,8 +23,9 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     SharedModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
-  declarations: [ReviewPage]
+  declarations: [ConsultationPage ],
+  entryComponents:[]
 })
-export class ReviewPageModule {}
+export class ConsultationPageModule {}
