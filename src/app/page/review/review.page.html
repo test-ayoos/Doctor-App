@@ -82,7 +82,7 @@
                 <ion-grid>
 
                     <ion-row>
-                      <ion-col class="name">Jishnu J <p class="date">{{a}} Days Ago</p></ion-col>
+                      <ion-col class="name">Jishnu J <p class="date"><time>11/2/2018</time></p></ion-col>
                     </ion-row>
     
                     <ion-row>
@@ -94,6 +94,21 @@
                     <ion-row>
                       <ion-col  text-left>
                         <ion-label>Please help me out. i have two screen . when i go from first screen to next screen. in next screen i have one button called back. When i press that i should be back to first screen. how to so that ?</ion-label>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row text-left>
+                      <ion-col>
+                        <span>
+                            <ion-icon class="reviewIcon" src="/assets/like.svg" ></ion-icon>
+                            {{a * 10}}    
+                        </span>
+                        <span>
+                            <ion-icon class="reviewIcon" src="/assets/reply.svg" ></ion-icon>
+                            {{a * 10}}     
+                        </span>
+                        <span>
+                          <ion-label>View reply</ion-label>
+                        </span>
                       </ion-col>
                     </ion-row>
     

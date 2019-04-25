@@ -1,16 +1,27 @@
+.shadow {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 20005;
+    background: transparent;
+}
 .autocomplete {
     
-    height: 70px;
-    width: 100%;
+
+    width: 100vw;
     background: white;
     position: absolute;
-    z-index: 99999;
-    display: none;
+    z-index: 20007;
     padding: 15px;
     align-items: center;
     margin-bottom: 10px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 3px;
+    margin: auto;
+    left: -11vw;
+    right: 0px;
 }
 
 #badgeContainer {
@@ -30,26 +41,34 @@
     background: #da7e7e;
     color: white;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 
+#badgeContainer p ion-icon {
+
+    background: whitesmoke;
+    color: black;
+    margin-left: 5px;
+    border-radius: 50%;
+}
 
 input {
     width: 100%;
     height: 50px;
    outline: none;
    border: none;
-   padding: 17px;
 }
 input:focus {
     border:0px;
-}
-
-input:required {
-    
 }
 
 .input-dropdown-container {
     margin-bottom: 10px;
     font-size: 17px;
     border-bottom: 1px solid #ededed;
+    background-color: white;
+    position: relative;
+    z-index: 20004;
 }

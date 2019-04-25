@@ -1,3 +1,4 @@
+import { PrescriptionComponent } from './../../shared/component/prescription/prescription.component';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -26,6 +27,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   declarations: [ConsultationPage ],
-  entryComponents:[]
+  entryComponents:[PrescriptionComponent]
 })
 export class ConsultationPageModule {}

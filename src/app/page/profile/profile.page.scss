@@ -72,6 +72,20 @@ ion-button ion-icon , ion-back-button{
 
   }
 
+  .font-mono {
+      font-family: monospace;
+  }
+
+  .cl-green {
+      color: greenyellow;
+  }
+  .cl-orangered {
+      color: orangered;
+  }
+
+  .cl-black {
+      color:black;
+  }
   
   #adjustment-container {
 
@@ -99,7 +113,7 @@ ion-button ion-icon , ion-back-button{
       width: 100%;
   }
 
-  ion-icon[name="mail"] , ion-icon[name="phone-portrait"]
+  ion-icon[name="mail"] , ion-icon[name="phone-portrait"] , ion-icon[name="calendar"]
   {
       margin-right:5px;
   }

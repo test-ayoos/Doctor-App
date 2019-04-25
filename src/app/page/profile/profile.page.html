@@ -40,13 +40,13 @@
         <ion-grid>
           <ion-row>
             <ion-col text-center>
-                <ion-text text-center>Register ID:{{doctor.id}}</ion-text>
+                <ion-text text-center class="font-mono">Register ID:{{doctor.id}}</ion-text>
             </ion-col>
           </ion-row>
          
           <ion-row>
             <ion-col>
-              <ion-label text-center id="name" *ngIf="!editMode">{{doctor.name}}</ion-label>
+              <ion-label text-center id="name"  class="font-mono"*ngIf="!editMode">{{doctor.name}}</ion-label>
               <ion-item *ngIf="editMode" >
                   <ion-input form="profileForm" text-center type="text" value="{{doctor.name}}" required></ion-input>
               </ion-item>
@@ -55,7 +55,7 @@
 
           <ion-row>
             <ion-col text-center class="flex-box">
-              <ion-label *ngIf="!editMode">{{doctor.speciality}}</ion-label>
+              <ion-label *ngIf="!editMode" class="font-mono">{{doctor.speciality}}</ion-label>
               <ion-item *ngIf="editMode">
                   <ion-input form="profileForm" text-center type="text" value="{{doctor.speciality}}"  required></ion-input>
               </ion-item >
@@ -68,8 +68,8 @@
       <ion-grid>
         <ion-row>
           <ion-col text-center class="flex-box">
-            <ion-icon name="phone-portrait"></ion-icon>
-            <ion-label *ngIf="!editMode">{{doctor.number}}</ion-label>
+            <ion-icon name="phone-portrait" class="cl-black"></ion-icon>
+            <ion-label *ngIf="!editMode" class="font-mono">{{doctor.number}}</ion-label>
             <ion-item *ngIf="editMode">
                 <ion-input form="profileForm" text-center type="text" value="{{doctor.number}}" required></ion-input>
             </ion-item>
@@ -78,13 +78,22 @@
 
         <ion-row>
           <ion-col text-center class="flex-box">
-            <ion-icon name="mail"></ion-icon>
-            <ion-label *ngIf="!editMode">{{doctor.email}}</ion-label>
+            <ion-icon name="mail" class="cl-orangered"></ion-icon>
+            <ion-label *ngIf="!editMode" class="font-mono">{{doctor.email}}</ion-label>
             <ion-item *ngIf="editMode">
                 <ion-input form="profileForm" text-center type="text" value="{{doctor.email}}"  required></ion-input>
             </ion-item >
           </ion-col>
         </ion-row>
+
+        <ion-row>
+            <ion-col text-center class="flex-box">
+                <ion-icon *ngIf="!editMode"  name="calendar" class="cl-green"></ion-icon>
+                <ion-label *ngIf="!editMode" class="font-mono">{{doctor.practice}}</ion-label>
+                <ionic-calendar-date-picker *ngIf="editMode" ></ionic-calendar-date-picker>	
+              </ion-col>
+        </ion-row>
+
 
     
       </ion-grid>
@@ -93,7 +102,7 @@
 
   <ion-card class="detail-card">
     <ion-card-content>
-      <ion-badge (click)="clinicShow($event)" color="secondary" *ngFor="let clinic of doctor.clinic">{{clinic}}
+      <ion-badge  color="secondary" *ngFor="let clinic of doctor.clinic">{{clinic}}
           <ion-icon (click)="removeClinic($event)" name="close"></ion-icon>
       </ion-badge>
       <ion-label float-right class="add-button">

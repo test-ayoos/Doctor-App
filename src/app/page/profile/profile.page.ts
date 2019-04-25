@@ -22,13 +22,14 @@ export class ProfilePage implements OnInit {
     speciality:["Neurologist"],
     degree:["IFGRT","ASERT"],
     number:"+91 900909999",
-    rating:4
+    rating:4,
+    practice:"11/2/2018"
   };
 
   
   editMode = false;
 
-  profilePic: String = '/assets/boy.png';
+  profilePic: String = '/assets/user.svg';
 
   constructor(
     public navCtrl:NavController,

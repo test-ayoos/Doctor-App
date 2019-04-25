@@ -7,23 +7,21 @@ import { Component, OnInit, ViewChild, Renderer2, ElementRef, Input } from '@ang
 })
 export class InputDropdownComponent implements OnInit {
 
-  @ViewChild('inputContainer') inputContainer:ElementRef;
+  value: String = "";
 
-  @ViewChild('badgeContainer') badgeContainer:ElementRef;
-
-  @ViewChild('input') input:ElementRef;
-
-  @Input() options: String[];
-
-  @Input() fillOptions;
-
-  value: String;
-
-  selected:String;
+  isOn : Boolean = false;
 
   selects:String[] = [];
 
+  @Input() options:String[] = [];
+
+  @Input() tmpOptions:String[] = []
+
   @Input() placeholder:String;
+
+  @ViewChild('inputBox') inputBox:ElementRef;
+
+  @ViewChild('suggetionBox') suggetionBox:ElementRef;
 
   constructor(private renderer: Renderer2) { }
 
@@ -31,80 +29,62 @@ export class InputDropdownComponent implements OnInit {
 
   }
 
-  async autocomplete(event) {
-    
+  close() {
 
-    
-    let count = 0;
-    
-    if(this.value === "") {
-      this.inputContainer.nativeElement.style="display:none";    }
-    else {
+      this.isOn = false;
+  }
 
-      this.inputContainer.nativeElement.innerHTML = "";
+  removeItem(option) {
 
-      let  x = this.inputContainer.nativeElement.parentNode.getBoundingClientRect();
-  
-      this.inputContainer.nativeElement.style.display = "flex";
-      this.inputContainer.nativeElement.style.width = "100%";
+      this.selects = this.selects.filter(function(val, index, arr){
 
-      await this.options.forEach((option)=>
-      {
+        return !(val === option)});
+
+      this.options.push(option);
+  }
+
+  selectMatching(value:any) {
+
+    this.selects.push(value);
+    this.options = this.options.filter(function(val, index, arr){
+
+      return !(val === value)});
+
+    this.isOn = false;
+    this.value = "";
+
+    this.inputBox.nativeElement.focus();
+  }
+
+  findMatching() {
+
+    this.tmpOptions = [];
+
+    if(this.value.length != 0) {
+
+      this.isOn = true;
+      
+      for(let option of this.options) {
 
         if(this.value.substr(0 , this.value.length).toUpperCase() === option.substr(0,this.value.length).toUpperCase()) {
   
-          count++;
-
-          let div:HTMLDivElement = this.renderer.createElement('p');
-          div.addEventListener("click" , (event)=>{
-
-            this.inputContainer.nativeElement.style="display:none";
-            this.value = "";
-            this.selected = event.toElement.innerHTML;
-
-            let p = this.renderer.createElement('p');
-            this.input.nativeElement.focus();
-
-            p.addEventListener('click' , (event)=>{
-
-                this.options.push(event.target.innerHTML)
-                event.target.remove();
-                this.input.nativeElement.focus();
-            });
-
-            let ptxt = this.renderer.createText(this.selected.toString());
-
-            let tmpSelected = this.selected;
-
-            this.selects.push(tmpSelected);
-
-            p.appendChild(ptxt);
-
-            this.badgeContainer.nativeElement.appendChild(p);
-
-            this.options = this.options.filter(function(value, index, arr){
-
-              return !(value === tmpSelected)});
-
-          })
-
-          let txt = this.renderer.createText(option.toString());
-  
-          this.renderer.appendChild(div,txt);
-  
-          this.renderer.appendChild(this.inputContainer.nativeElement , div);
-
-          this.inputContainer.nativeElement.focus();
-
-          this.input.nativeElement.focus();
+          this.tmpOptions.push(option);
         }
-      });
-  
+      }
+    }
+    else {
+
+      this.isOn = false;
+      this.value = "";
     }
 
-    if(count==0) {
-      this.inputContainer.nativeElement.innerHTML="No Matches found";
-    }
+    this.suggetionBox.nativeElement.focus();
+
+    this.inputBox.nativeElement.focus();
+
+  
+
+
   }
 
 }

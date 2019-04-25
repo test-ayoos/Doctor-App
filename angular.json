@@ -37,6 +37,12 @@
               },
               {
                 "input": "src/global.scss"
+              },
+              {
+                "input": "./node_modules/animate.css/animate.css"
+              },
+              {
+                "input": "./node_modules/float-label-css/dist/float-label.css"
               }
             ],
             "scripts": [],

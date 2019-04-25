@@ -11,6 +11,8 @@ export class ReviewPage implements OnInit {
   constructor(public navCtrl: NavController) { }
 
   ngOnInit() {
+
+    console.log("Page Initiated");
   }
 
   goPrevious() {
