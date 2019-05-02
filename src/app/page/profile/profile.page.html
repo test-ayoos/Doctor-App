@@ -132,7 +132,7 @@
 
   <ion-card class="detail-card">
     <ion-card-content>
-      <ion-badge  color="secondary" *ngFor="let clinic of workplaces">{{clinic}}
+      <ion-badge  color="secondary" *ngFor="let clinic of workplaces">{{clinic.name}}
           <ion-icon (click)="deleteWorkPlace(clinic.id)" name="close"></ion-icon>
       </ion-badge>
       <ion-label float-right class="add-button">
@@ -143,7 +143,7 @@
   
   <ion-card class="detail-card">
     <ion-card-content>
-      <ion-badge (click)="updateQualificationModal(degree.id)" color="primary" *ngFor="let degree of qualifications">{{degree}}
+      <ion-badge (click)="updateQualificationModal(degree.id)" color="primary" *ngFor="let degree of qualifications">{{degree.qualification}}
           <ion-icon (click)="deleteQualification(degree.id)" name="close"></ion-icon>
       </ion-badge>
 
