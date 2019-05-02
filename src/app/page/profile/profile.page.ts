@@ -156,11 +156,10 @@ export class ProfilePage implements OnInit {
 
     // Only For Testing Purpose
 
-    this.queryResourceService.findAllQualificationByDoctorIdUsingGET(this.doctor.id)
+    this.queryResourceService.findAllQualificationByDoctorIdUsingGETResponse(this.doctor.id)
     .subscribe(result => {
-      this.qualifications = result;
-
-    })
+      this.qualifications = result.body;
+    });
 
   }
 
@@ -193,6 +192,10 @@ export class ProfilePage implements OnInit {
       componentProps: {doctorId: this.doctor.id}
     });
 
+    modal.onDidDismiss().then(data => {
+      this.ngOnInit();
+    });
+
     modal.present();
   }
 
@@ -201,6 +204,10 @@ export class ProfilePage implements OnInit {
       component: ClinicPage,
       cssClass: 'auto-height',
       componentProps: {doctorId: this.doctor.id}
+    });
+
+    modal.onDidDismiss().then(data => {
+      this.ngOnInit();
     });
 
     modal.present();

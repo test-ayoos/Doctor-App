@@ -24,7 +24,7 @@ class QueryResourceService extends __BaseService {
   static readonly findContactInfoUsingGETPath = '/api/queries/contact-infos/{searchTerm}';
   static readonly findDoctorUsingGETPath = '/api/queries/doctor/{searchTerm}';
   static readonly findAllWorkPlacesByDoctorIdUsingGETPath = '/api/queries/findworkplacesBydoctorId/{doctorId}';
-  static readonly findAllQualificationByDoctorIdUsingGETPath = '/api/queries/qualifications/{doctorId}';
+  static readonly findAllQualificationByDoctorIdUsingGETPath = '/api/queries/qualification/{doctorId}';
   static readonly findAllQualificationUsingGETPath = '/api/queries/qualifications/{searchTerm}';
   static readonly findAllReviewUsingGETPath = '/api/queries/review';
   static readonly findAllSesionInfoUsingGETPath = '/api/queries/session-infos';
@@ -156,7 +156,7 @@ class QueryResourceService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/api/queries/qualifications/${doctorId}`,
+      this.rootUrl + `/api/queries/qualification/${doctorId}`,
       __body,
       {
         headers: __headers,
