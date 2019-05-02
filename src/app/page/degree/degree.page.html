@@ -8,28 +8,29 @@
       <ion-col>
         <ion-item>
             <ion-icon src="/assets/certificate.svg" slot="start"></ion-icon>
-              <ion-input type="search" autocomplete="on" autocorrect="on" debounce="1000" clearInput (ionChange)="onSearch()" placeholder="Qualification" [(ngModel)]="degreeName" ></ion-input>
+              <ion-input type="search" [(ngModel)]="qualification.qualification"
+               placeholder="Qualification" (change)="onSearch()"></ion-input>
             </ion-item>   
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <!-- <ion-row>
       <ion-col>
       <ion-item *ngFor="let option of values">
         <ion-label (click)="select(option)">{{option.description}}</ion-label>
       </ion-item>  
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
 </ion-grid>
 
 <ion-grid>
     <ion-row>
         <ion-col no-padding no-margin>
-            <ion-button expand="block">Save</ion-button>
+            <ion-button expand="block" (click)="addUpdateQualification()">Save</ion-button>
         </ion-col>
         <ion-col no-padding no-margin>
-            <ion-button expand="block">Cancel</ion-button>
+            <ion-button expand="block" (click)="dismiss()" >Cancel</ion-button>
         </ion-col>
       </ion-row>
 </ion-grid>

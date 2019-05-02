@@ -8,7 +8,7 @@
       <ion-col>
         <ion-item>
             <ion-icon src="/assets/hospital.svg" slot="start"></ion-icon>
-              <ion-input type="search" autocomplete="on" autocorrect="on" debounce="1000" clearInput (ionChange)="onSearch()" placeholder="Hospital / Clinical Name" [(ngModel)]="clinicName" ></ion-input>
+              <ion-input type="search" placeholder="Hospital / Clinical Name" [(ngModel)]="clinicName" ></ion-input>
             </ion-item>   
       </ion-col>
     </ion-row>
@@ -17,7 +17,7 @@
       <ion-col>
           <ion-item>
               <ion-icon name="locate" slot="start"></ion-icon>
-                <ion-input type="search" autocomplete="on" autocorrect="on" debounce="1000" clearInput (IonChange)="onSearch()" placeholder="Search locations ..." [(ngModel)]="searchTerm" ></ion-input>
+                <ion-input type="search"  placeholder="Search locations ..." (ionChange)="onSearch()" [(ngModel)]="searchTerm" ></ion-input>
               </ion-item>   
        </ion-col>
     </ion-row>
@@ -35,10 +35,10 @@
 <ion-grid>
     <ion-row>
         <ion-col no-padding no-margin>
-            <ion-button expand="block">Save</ion-button>
+            <ion-button expand="block" (click)="postWorkPlace()">Save</ion-button>
         </ion-col>
         <ion-col no-padding no-margin>
-            <ion-button expand="block">Cancel</ion-button>
+            <ion-button expand="block" (click)="dismiss()">Cancel</ion-button>
         </ion-col>
       </ion-row>
 </ion-grid>

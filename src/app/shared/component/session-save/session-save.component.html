@@ -1,0 +1,77 @@
+<ion-header>
+
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-button (click)="dismiss()">
+          <ion-icon name="close" ></ion-icon>
+      </ion-button>
+      <ion-title>
+          Add Sessions for {{dayName}}
+        </ion-title>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="save"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let session of sessionInfoArray">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col text-center>{{session.fromTime}}</ion-col>
+          <ion-col text-center>{{session.toTime}}</ion-col>
+          <ion-col text-center>{{session.interval}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+
+  <ion-card>
+
+    <ion-card-content>
+
+      <form #form="ngForm">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+                <ion-label position="floating">From</ion-label>
+                <ion-input type="time" [(ngModel)]="sessionInfo.fromTime" name="from" required></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label position="floating">To</ion-label>
+                  <ion-input type="time" [(ngModel)]="sessionInfo.toTime" name="to" required></ion-input>
+              </ion-item>          
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label position="floating">Interval</ion-label>
+                  <ion-input  name="X" maxlength="3" size="2" min="1" max="100" type="number" name="interval" [(ngModel)]="sessionInfo.interval" required></ion-input>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button  [disabled]="form.invalid" (click)="addSession()" expand="block">Add</ion-button>
+          </ion-col >
+        </ion-row>
+
+      </ion-grid>
+    </form>
+
+    </ion-card-content>
+
+
+  </ion-card>
+
+</ion-footer>

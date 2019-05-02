@@ -12,27 +12,27 @@ export class ConsultationPage implements OnInit {
 
   @ViewChild('slides') slides: IonSlides;
 
-  @ViewChild('backButton') backButton:IonButton;
+  @ViewChild('backButton') backButton: IonButton;
 
 
-  options:String[] = ['fever' , 'headeache' , 'cough' , 'another' , 'blll','cccc'];
-  
-  title:String;
+  options: String[] = ['fever' , 'headeache' , 'cough' , 'another' , 'blll', 'cccc'];
 
-  index:Number = 0;
+  title: String;
+
+  index = 0;
 
   medicines = [
 
-    {type:"tab",name:"paracetamol" , strength:"50mg" , dose:"1-0-1" , duration:"3 Days BF"},
-    {type:"tonic",name:"Bsyuy" , strength:"200ml" , dose:"1-1-1" , duration:"2 Days AF"},
-    {type:"tab",name:"Calpol" , strength:"10mg" , dose:"0-0-1" , duration:"1 Days BF"},
-    {type:"tab",name:"Terhaf" , strength:"10mg" , dose:"1-1-1" , duration:"2 Days BF"},
-    {type:"tonic",name:"Terhaf" , strength:"10mg" , dose:"1-1-1" , duration:"2 Days BF"},
-    {type:"tab",name:"Terhaf" , strength:"10mg" , dose:"1-1-1" , duration:"2 Days BF"},
-    {type:"tonic",name:"Terhaf" , strength:"10mg" , dose:"1-1-1" , duration:"2 Days BF"},
-    {type:"tab",name:"Terhaf" , strength:"10mg" , dose:"1-1-1" , duration:"2 Days BF"},
+    {type: 'tab', name: 'paracetamol' , strength: '50mg' , dose: '1-0-1' , duration: '3 Days BF'},
+    {type: 'tonic', name: 'Bsyuy' , strength: '200ml' , dose: '1-1-1' , duration: '2 Days AF'},
+    {type: 'tab', name: 'Calpol' , strength: '10mg' , dose: '0-0-1' , duration: '1 Days BF'},
+    {type: 'tab', name: 'Terhaf' , strength: '10mg' , dose: '1-1-1' , duration: '2 Days BF'},
+    {type: 'tonic', name: 'Terhaf' , strength: '10mg' , dose: '1-1-1' , duration: '2 Days BF'},
+    {type: 'tab', name: 'Terhaf' , strength: '10mg' , dose: '1-1-1' , duration: '2 Days BF'},
+    {type: 'tonic', name: 'Terhaf' , strength: '10mg' , dose: '1-1-1' , duration: '2 Days BF'},
+    {type: 'tab', name: 'Terhaf' , strength: '10mg' , dose: '1-1-1' , duration: '2 Days BF'},
 
-  ]
+  ];
 
   removeMedicine(med) {
 
@@ -48,22 +48,30 @@ export class ConsultationPage implements OnInit {
 
   }
 
+  async startConsultation() {
+
+      const val = confirm('Pramed Required');
+      if (val !== undefined) {
+        this.next();
+      }
+  }
+
   changeHeader() {
 
-    this.slides.getActiveIndex().then(res=>{
-     
+    this.slides.getActiveIndex().then(res => {
+
       console.log(res);
 
       this.index = res;
 
-      switch(res) {
+      switch (res) {
 
-        case 0:case 4:this.title = "";break;
-        case 1:this.title = "Medical Summary";break;
-        case 2:this.title = "Prescription";break;
+        case 0: case 4: this.title = ''; break;
+        case 1: this.title = 'Medical Summary'; break;
+        case 2: this.title = 'Prescription'; break;
 
       }
-  
+
 
     });
 
@@ -72,14 +80,14 @@ export class ConsultationPage implements OnInit {
   constructor(public modalCtrl: ModalController) { }
 
   ngOnInit() {
-    
+
   }
 
   async create() {
 
     const modal = await this.modalCtrl.create({
-      component:PrescriptionComponent,
-      cssClass:'prescriptionModal'
+      component: PrescriptionComponent,
+      cssClass: 'prescriptionModal'
     });
 
     modal.present();

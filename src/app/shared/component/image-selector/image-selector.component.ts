@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { PopoverController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-image-selector',
@@ -8,12 +9,20 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 })
 export class ImageSelectorComponent implements OnInit {
 
-  constructor(private camera:Camera) { }
+  fileToUpload: File;
+  fileUrl = './assets/picture.svg';
 
-  ngOnInit() {}
+  constructor(
+    private camera: Camera,
+    private modalController: ModalController
+  ) { }
+
+  ngOnInit() {
+  }
 
   startFileUploadHtmlDialog() {
-    document.getElementById("fileUpload").click();
+    document.getElementById('fileUpload').click();
+
   }
 
   startCamera() {
@@ -23,15 +32,43 @@ export class ImageSelectorComponent implements OnInit {
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
-    }
-    
+    };
+
     this.camera.getPicture(options).then((imageData) => {
      // imageData is either a base64 encoded string or a file URI
      // If it's base64 (DATA_URL):
-     let base64Image = 'data:image/jpeg;base64,' + imageData;
+     const base64Image = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
      // Handle error
     });
+  }
+
+
+  onSelectFile(event) {
+
+    this.fileToUpload = event.target.files.item(0);
+
+    const freader = new FileReader();
+
+    freader.onload = (ev: any) => {
+
+      this.fileUrl = ev.target.result;
+
+      this.dismiss();
+    };
+
+    freader.readAsDataURL(this.fileToUpload);
+
+  }
+
+
+  async dismiss() {
+    await this.modalController.dismiss(
+       {
+          imageBase64: this.fileUrl.substring(this.fileUrl.indexOf(',') + 1),
+          imageType: this.fileToUpload.type
+        }
+    );
   }
 
 }

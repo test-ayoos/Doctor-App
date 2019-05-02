@@ -16,6 +16,6 @@ export class AuthGuardService implements CanActivate {
     }
 
     this.navController.navigateRoot('/');
-    return false;
+    return true;
   }
 }

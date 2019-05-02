@@ -1,3 +1,4 @@
+import { SessionSaveComponent } from './session-save/session-save.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -19,14 +20,16 @@ import { RatingComponent } from './rating/rating.component';
     PrescriptionComponent,
     ProfileOptionComponent,
     ImageSelectorComponent,
-    RatingComponent
+    RatingComponent,
+    SessionSaveComponent
   ],
   exports: [
       InputDropdownComponent,
       PrescriptionComponent,
       ProfileOptionComponent,
       ImageSelectorComponent,
-      RatingComponent
+      RatingComponent,
+      SessionSaveComponent
   ]
 })
 export class SharedModule {}

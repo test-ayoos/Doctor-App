@@ -1,3 +1,4 @@
+import { KeycloakAdminClient } from 'keycloak-admin/lib/client';
 import { NotificationPage } from './../notification/notification.page';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Component, OnInit } from '@angular/core';
@@ -12,8 +13,6 @@ export class DashboardPage implements OnInit {
 
   doctor;
 
-  username: String;
-
   constructor(
     public navCtrl: NavController,
     public modalController: ModalController,
@@ -23,10 +22,14 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
 
-    this.authService.loadUserProfile().then(
+    this.getDoctor();
+  }
+
+  async getDoctor() {
+    await this.authService.loadUserProfile().then(
       (res) =>
       {
-   
+          this.doctor = res;
       }
     );
   }

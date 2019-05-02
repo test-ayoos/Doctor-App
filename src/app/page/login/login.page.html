@@ -23,10 +23,12 @@
                         </div>
                         <div padding>
                           <ion-item>
-                            <ion-input name="email" type="email" placeholder="your@email.com" [(ngModel)]="username" required></ion-input>
+                            <ion-label position="floating">Email</ion-label>
+                            <ion-input name="email" type="email"  [(ngModel)]="username" required></ion-input>
                           </ion-item>
                           <ion-item>
-                            <ion-input name="password" type="password" placeholder="Password" [(ngModel)]="password" required></ion-input>
+                            <ion-label position="floating">Password</ion-label>
+                            <ion-input name="password" type="password"  [(ngModel)]="password" required></ion-input>
                           </ion-item>
                         </div>
                         <div padding>

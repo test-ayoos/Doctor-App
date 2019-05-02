@@ -72,7 +72,7 @@
 
         <ion-row margin justify-content-center>
           <ion-col>
-            <ion-button (click)="this.slides.slideNext()" full-width color="success">Start Consultation</ion-button>
+            <ion-button (click)="startConsultation()" full-width color="success">Start Consultation</ion-button>
           </ion-col>
         </ion-row>
 
@@ -214,7 +214,7 @@
   <ion-grid>
     <ion-row justify-content-center>
       <ion-col size="12" *ngIf="index == 1">
-          <ion-button (click)="this.slides.slideNext()" expand="full" color="success">Next</ion-button>      
+          <ion-button (click)="this.slides.slideNext()" expand="full" color="primary">Next</ion-button>      
       </ion-col>
       <ion-col size="6" *ngIf="index == 2">
           <ion-button (click)="this.slides.slideNext()" expand="full" color="primary">Save</ion-button>

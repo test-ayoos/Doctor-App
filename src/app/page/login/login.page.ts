@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -18,7 +18,8 @@ export class LoginPage implements OnInit {
 
   constructor(
     private oauthService: OAuthService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    public loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -35,7 +36,15 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateRoot('/register');
   }
 
-  login() {
+  async login() {
+
+    const loading = await this.loadingController.create({
+      spinner: 'dots',
+      translucent: true,
+      cssClass: 'loading'
+    });
+
+    loading.present();
 
     this.oauthService.fetchTokenUsingPasswordFlowAndLoadUserProfile(this.username, this.password, new HttpHeaders()).then(() => {
  
@@ -44,10 +53,11 @@ export class LoginPage implements OnInit {
       if (claims) console.log(claims);
  
       if (this.oauthService.hasValidAccessToken()) {
+        loading.dismiss();
         this.navCtrl.navigateRoot(this.successPage);
       }
     }).catch((err:HttpErrorResponse)=>{
-
+      loading.dismiss()
       this.message=err.error.error_description;
 
     });
