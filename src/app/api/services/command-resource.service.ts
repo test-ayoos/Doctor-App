@@ -7,10 +7,15 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
+import { ConsultationRequest } from '../models/consultation-request';
+import { DefaultInfoRequest } from '../models/default-info-request';
+import { ParamedicalExaminationRequest } from '../models/paramedical-examination-request';
 import { ContactInfoDTO } from '../models/contact-info-dto';
 import { DoctorDTO } from '../models/doctor-dto';
+import { InitiateMedicalSummaryRequest } from '../models/initiate-medical-summary-request';
 import { QualificationDTO } from '../models/qualification-dto';
 import { SessionInfoDTO } from '../models/session-info-dto';
+import { ReservedSlotDTO } from '../models/reserved-slot-dto';
 import { WorkPlaceDTO } from '../models/work-place-dto';
 
 /**
@@ -20,16 +25,23 @@ import { WorkPlaceDTO } from '../models/work-place-dto';
   providedIn: 'root',
 })
 class CommandResourceService extends __BaseService {
+  static readonly collectConsultationInformationsUsingPOSTPath = '/api/commands/collect-Consultation-Info/{taskId}';
+  static readonly collectInformationsUsingPOSTPath = '/api/commands/collect-Default-info/{taskId}';
+  static readonly collectParamedicalExaminationInformationsUsingPOSTPath = '/api/commands/collect-ParamedicalExamination-Info/{taskId}';
+  static readonly collectPrescriptionInformationsUsingPOSTPath = '/api/commands/collect-Prescription-Info/{taskId}';
   static readonly createContactInfoUsingPOSTPath = '/api/commands/contact-infos';
   static readonly updateContactInfoUsingPUTPath = '/api/commands/contact-infos';
   static readonly deleteContactInfoUsingDELETEPath = '/api/commands/contact-infos/{id}';
   static readonly testUsingPOSTPath = '/api/commands/doc';
   static readonly createDoctorUsingPOSTPath = '/api/commands/doctors';
   static readonly updateDoctorUsingPUTPath = '/api/commands/doctors';
+  static readonly initiateUsingPOSTPath = '/api/commands/initiate-Consultation';
   static readonly createQualificationUsingPOSTPath = '/api/commands/qualifications';
   static readonly updateQualificationUsingPUTPath = '/api/commands/qualifications';
   static readonly deleteQualificationUsingDELETEPath = '/api/commands/qualifications';
   static readonly createSessionInfoUsingPOSTPath = '/api/commands/sessionInfo';
+  static readonly createSlotUsingPOSTPath = '/api/commands/slot/{date}';
+  static readonly uploadPrescriptionUsingPOSTPath = '/api/commands/upload-prescription';
   static readonly createWorkPlaceUsingPOSTPath = '/api/commands/work-places';
   static readonly updateWorkPlaceUsingPUTPath = '/api/commands/work-places';
   static readonly deleteWorkPlaceUsingDELETEPath = '/api/commands/work-places';
@@ -39,6 +51,193 @@ class CommandResourceService extends __BaseService {
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  /**
+   * @param params The `CommandResourceService.CollectConsultationInformationsUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `consultationRequest`: consultationRequest
+   */
+  collectConsultationInformationsUsingPOSTResponse(params: CommandResourceService.CollectConsultationInformationsUsingPOSTParams): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.consultationRequest;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/commands/collect-Consultation-Info/${params.taskId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param params The `CommandResourceService.CollectConsultationInformationsUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `consultationRequest`: consultationRequest
+   */
+  collectConsultationInformationsUsingPOST(params: CommandResourceService.CollectConsultationInformationsUsingPOSTParams): __Observable<null> {
+    return this.collectConsultationInformationsUsingPOSTResponse(params).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * @param params The `CommandResourceService.CollectInformationsUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `defaultInfoRequest`: defaultInfoRequest
+   */
+  collectInformationsUsingPOSTResponse(params: CommandResourceService.CollectInformationsUsingPOSTParams): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.defaultInfoRequest;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/commands/collect-Default-info/${params.taskId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param params The `CommandResourceService.CollectInformationsUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `defaultInfoRequest`: defaultInfoRequest
+   */
+  collectInformationsUsingPOST(params: CommandResourceService.CollectInformationsUsingPOSTParams): __Observable<null> {
+    return this.collectInformationsUsingPOSTResponse(params).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * @param params The `CommandResourceService.CollectParamedicalExaminationInformationsUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `paramedicalExaminationRequest`: paramedicalExaminationRequest
+   */
+  collectParamedicalExaminationInformationsUsingPOSTResponse(params: CommandResourceService.CollectParamedicalExaminationInformationsUsingPOSTParams): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.paramedicalExaminationRequest;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/commands/collect-ParamedicalExamination-Info/${params.taskId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param params The `CommandResourceService.CollectParamedicalExaminationInformationsUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `paramedicalExaminationRequest`: paramedicalExaminationRequest
+   */
+  collectParamedicalExaminationInformationsUsingPOST(params: CommandResourceService.CollectParamedicalExaminationInformationsUsingPOSTParams): __Observable<null> {
+    return this.collectParamedicalExaminationInformationsUsingPOSTResponse(params).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * @param params The `CommandResourceService.CollectPrescriptionInformationsUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `period`:
+   *
+   * - `frequency`:
+   *
+   * - `drug`:
+   *
+   * - `dose`:
+   */
+  collectPrescriptionInformationsUsingPOSTResponse(params: CommandResourceService.CollectPrescriptionInformationsUsingPOSTParams): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    if (params.period != null) __params = __params.set('period', params.period.toString());
+    if (params.frequency != null) __params = __params.set('frequency', params.frequency.toString());
+    if (params.drug != null) __params = __params.set('drug', params.drug.toString());
+    if (params.dose != null) __params = __params.set('dose', params.dose.toString());
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/commands/collect-Prescription-Info/${params.taskId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param params The `CommandResourceService.CollectPrescriptionInformationsUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `period`:
+   *
+   * - `frequency`:
+   *
+   * - `drug`:
+   *
+   * - `dose`:
+   */
+  collectPrescriptionInformationsUsingPOST(params: CommandResourceService.CollectPrescriptionInformationsUsingPOSTParams): __Observable<null> {
+    return this.collectPrescriptionInformationsUsingPOSTResponse(params).pipe(
+      __map(_r => _r.body as null)
+    );
   }
 
   /**
@@ -253,6 +452,42 @@ class CommandResourceService extends __BaseService {
   }
 
   /**
+   * @param medicalSummaryRequest medicalSummaryRequest
+   * @return OK
+   */
+  initiateUsingPOSTResponse(medicalSummaryRequest: InitiateMedicalSummaryRequest): __Observable<__StrictHttpResponse<string>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = medicalSummaryRequest;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/commands/initiate-Consultation`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'text'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<string>;
+      })
+    );
+  }
+  /**
+   * @param medicalSummaryRequest medicalSummaryRequest
+   * @return OK
+   */
+  initiateUsingPOST(medicalSummaryRequest: InitiateMedicalSummaryRequest): __Observable<string> {
+    return this.initiateUsingPOSTResponse(medicalSummaryRequest).pipe(
+      __map(_r => _r.body as string)
+    );
+  }
+
+  /**
    * @param qualificationDTO qualificationDTO
    * @return OK
    */
@@ -364,8 +599,10 @@ class CommandResourceService extends __BaseService {
    * - `sessionInfoDTO`: sessionInfoDTO
    *
    * - `monthList`: monthList
+   *
+   * @return OK
    */
-  createSessionInfoUsingPOSTResponse(params: CommandResourceService.CreateSessionInfoUsingPOSTParams): __Observable<__StrictHttpResponse<null>> {
+  createSessionInfoUsingPOSTResponse(params: CommandResourceService.CreateSessionInfoUsingPOSTParams): __Observable<__StrictHttpResponse<Array<SessionInfoDTO>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -384,7 +621,7 @@ class CommandResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<null>;
+        return _r as __StrictHttpResponse<Array<SessionInfoDTO>>;
       })
     );
   }
@@ -394,9 +631,84 @@ class CommandResourceService extends __BaseService {
    * - `sessionInfoDTO`: sessionInfoDTO
    *
    * - `monthList`: monthList
+   *
+   * @return OK
    */
-  createSessionInfoUsingPOST(params: CommandResourceService.CreateSessionInfoUsingPOSTParams): __Observable<null> {
+  createSessionInfoUsingPOST(params: CommandResourceService.CreateSessionInfoUsingPOSTParams): __Observable<Array<SessionInfoDTO>> {
     return this.createSessionInfoUsingPOSTResponse(params).pipe(
+      __map(_r => _r.body as Array<SessionInfoDTO>)
+    );
+  }
+
+  /**
+   * @param date date
+   * @return OK
+   */
+  createSlotUsingPOSTResponse(date: string): __Observable<__StrictHttpResponse<Array<ReservedSlotDTO>>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/commands/slot/${date}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<Array<ReservedSlotDTO>>;
+      })
+    );
+  }
+  /**
+   * @param date date
+   * @return OK
+   */
+  createSlotUsingPOST(date: string): __Observable<Array<ReservedSlotDTO>> {
+    return this.createSlotUsingPOSTResponse(date).pipe(
+      __map(_r => _r.body as Array<ReservedSlotDTO>)
+    );
+  }
+
+  /**
+   * @param file file
+   */
+  uploadPrescriptionUsingPOSTResponse(file: Blob): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __headers.append('Content-Type', 'multipart/form-data');
+    let __formData = new FormData();
+    __body = __formData;
+   if(file !== null && typeof file !== "undefined") { __formData.append('file', file as string | Blob);}
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/commands/upload-prescription`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param file file
+   */
+  uploadPrescriptionUsingPOST(file: Blob): __Observable<null> {
+    return this.uploadPrescriptionUsingPOSTResponse(file).pipe(
       __map(_r => _r.body as null)
     );
   }
@@ -509,6 +821,69 @@ class CommandResourceService extends __BaseService {
 }
 
 module CommandResourceService {
+
+  /**
+   * Parameters for collectConsultationInformationsUsingPOST
+   */
+  export interface CollectConsultationInformationsUsingPOSTParams {
+
+    /**
+     * taskId
+     */
+    taskId: string;
+
+    /**
+     * consultationRequest
+     */
+    consultationRequest: ConsultationRequest;
+  }
+
+  /**
+   * Parameters for collectInformationsUsingPOST
+   */
+  export interface CollectInformationsUsingPOSTParams {
+
+    /**
+     * taskId
+     */
+    taskId: string;
+
+    /**
+     * defaultInfoRequest
+     */
+    defaultInfoRequest: DefaultInfoRequest;
+  }
+
+  /**
+   * Parameters for collectParamedicalExaminationInformationsUsingPOST
+   */
+  export interface CollectParamedicalExaminationInformationsUsingPOSTParams {
+
+    /**
+     * taskId
+     */
+    taskId: string;
+
+    /**
+     * paramedicalExaminationRequest
+     */
+    paramedicalExaminationRequest: ParamedicalExaminationRequest;
+  }
+
+  /**
+   * Parameters for collectPrescriptionInformationsUsingPOST
+   */
+  export interface CollectPrescriptionInformationsUsingPOSTParams {
+
+    /**
+     * taskId
+     */
+    taskId: string;
+    period?: string;
+    frequency?: string;
+    drug?: string;
+    dose?: string;
+  }
 
   /**
    * Parameters for createSessionInfoUsingPOST

@@ -1,0 +1,36 @@
+
+<div>
+  <ion-item>
+    <ion-toggle *ngIf="arr.length > 0"></ion-toggle>
+    <ion-toggle *ngIf="arr.length <= 0" disabled></ion-toggle>
+    <ion-icon slot="end" name="add" (click)="iconClicked()"></ion-icon>
+    <ion-icon slot="end" name="arrow-down" (click)="toggleContent()"></ion-icon>
+    <ion-title>{{header}}</ion-title>
+  </ion-item>
+  <div  *ngIf="showContent">
+    <div > 
+      <ion-grid *ngIf="arr.length > 0" >
+         <ion-row  style="border-bottom: groove;" class="vertical-align-center header">
+          <ion-col><h4>Date</h4></ion-col>
+          <ion-col><h4>From</h4></ion-col>
+          <ion-col><h4>To</h4></ion-col>
+          <ion-col><h4>Interval</h4></ion-col>
+        </ion-row>       
+        <ion-row   style="border-bottom: groove;" *ngFor="let a of arr" class="vertical-align-center">
+          <ion-col text-center><ion-text><p>{{a.date}}</p></ion-text></ion-col>
+          <ion-col text-center><ion-text><p>{{a.fromTime}}</p></ion-text></ion-col>
+          <ion-col text-center><ion-text><p>{{a.toTime}}</p></ion-text></ion-col>
+          <ion-col text-center><ion-text><p>{{a.interval}}</p></ion-text></ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngIf="arr.length <= 0">
+          <ion-row >
+              <ion-col class="vertical-align-center">
+                <p>{{errMsg}}</p>
+              </ion-col>
+            </ion-row>    
+      </ion-grid>
+    </div>
+    <div></div>
+  </div>
+</div>

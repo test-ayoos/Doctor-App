@@ -1,0 +1,112 @@
+<div>
+
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button checked>
+      <ion-label>Personal Info</ion-label>
+    </ion-segment-button>
+    <ion-segment-button >
+      <ion-label>WorkPlaces</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+
+  <div class="personal-info" *ngIf="(toggleSegment == false)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+           <app-custom-input
+            [(ngModel)]="doctorCustom.userKeycloak.name"
+            [placeholder]="'Full Name'"
+            [defaultValue]="doctorCustom.userKeycloak.name"
+            [labelName]="'Name'"
+           ></app-custom-input>
+        </ion-col>
+        <ion-col size="12">
+          <app-custom-input
+           [(ngModel)]="doctorCustom.doctor.specialization"
+           [placeholder]="'Your Specialization'"
+           [defaultValue]="doctorCustom.doctor.specialization"
+           [labelName]="'Specialization'"
+          ></app-custom-input>
+       </ion-col>
+       <ion-col size="12">
+        <app-custom-input
+         ngModel
+         [placeholder]="'Phone Number'"
+         [defaultValue]="71676176176"
+         [labelName]="'Number'"
+        ></app-custom-input>
+     </ion-col>
+       <ion-col size="12">
+        <app-custom-input
+         [(ngModel)]="doctorCustom.userKeycloak.email"
+         [placeholder]="'Email'"
+         [defaultValue]="doctorCustom.userKeycloak?doctorCustom.userKeycloak.email:undefined"
+         [labelName]="'Email'"
+        ></app-custom-input>
+     </ion-col>
+     <ion-col size="12">
+        <app-custom-input
+         [(ngModel)]="doctorCustom.doctor.registerNumber"
+         [placeholder]="'Register Number'"
+         [defaultValue]="doctorCustom.doctor?doctorCustom.doctor.registerNumber:undefined"
+         [labelName]="'Register Number'"
+        ></app-custom-input>
+     </ion-col>
+     <ion-col size="12">
+        <ion-item>
+         <ion-label>{{doctorCustom.doctor.practiceSince}}</ion-label>
+         <input class="sd" type="date" #datePicker [(ngModel)]="practiceDate" (change)="dateChange()" name="selected_date" />
+         <span class="open-button">
+            <ion-icon name="calendar"></ion-icon>
+         </span>
+         </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="qualification-row">
+        <ion-col class="vertical-align-center" size="2" *ngFor="let qualification of doctorCustom.qualifications">
+          <ion-badge>
+            {{qualification.qualification}}
+            <ion-icon name="close" (click)="deleteQualificationEvent(qualification.id)"></ion-icon>
+          </ion-badge>
+        </ion-col>
+        <ion-col [ngClass]="{'vertical-align-center':doctorCustom.qualifications.length == 0}">
+            <ion-button fill="outline" color="success" size="small"
+            (click)="addQualification()"
+            >Add Qualification</ion-button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-fab vertical="top" horizontal="end" slot="fixed">
+      <ion-fab-button size="mini" (click)="saveDoctor()">
+        <ion-icon name="save"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+  <div class="workplace" *ngIf="(toggleSegment == true)">
+
+    <ion-item *ngFor="let workplace of doctorCustom.workplaces" >
+          <ion-thumbnail slot="start" (click)="updateWorkplace(workplace)">
+            <img src="/assets/map.png"/>
+          </ion-thumbnail>
+          <ion-label (click)="updateWorkplace(workplace)">
+              <h2>{{workplace.name}}</h2>
+              <p>{{workplace.location}}</p>
+          </ion-label>
+          <ion-icon name="trash" (click)="deleteWorkplaceEvent(workplace.id)"></ion-icon>
+        </ion-item>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button expand="block" (click)="addWorkplace()" fill="outline">Add WorkPlace</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+  </div>
+
+
+
+</div>

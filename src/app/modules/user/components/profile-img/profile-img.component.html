@@ -1,0 +1,22 @@
+<div>
+  <ion-grid>
+    <ion-row>
+        <ion-col class="vertical-align-center">
+              <ion-label for="selimg1">
+              <ion-avatar item-start (click)="selectImage($event)">
+                  <img *ngIf="image !== undefined" [src]="'data:' + 
+                  imageContentType
+                + ';base64,' + 
+                image
+                "/>
+                <img *ngIf="image === undefined" src="{{defaultImage}}"/>  
+              </ion-avatar> 
+                <ion-icon name="image" color="secondary" ></ion-icon>
+               </ion-label> 
+              <div class="caption">
+              </div> 
+          </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+

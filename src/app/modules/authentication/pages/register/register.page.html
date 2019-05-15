@@ -1,0 +1,115 @@
+<ion-header no-border>
+  <ion-toolbar color="primary"> 
+    <ion-buttons  *ngIf="slideNumber === 0 ">
+      <ion-icon name="arrow-back" (click)="navigate('/authentication/login')" margin></ion-icon>
+      <ion-title >Create a New Account</ion-title>
+    </ion-buttons>
+
+    <ion-buttons slot="start" *ngIf="slideNumber === 1">
+      <ion-button (click)="previousSlide()">
+        <ion-icon name="arrow-back"></ion-icon>Previous</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+ <div class="vertical-align-center">
+
+  <ion-slides #slides>
+
+    <!--  Slide One User Details -->
+    <ion-slide>
+      <ion-grid>
+          <ion-row clas>
+              <ion-col size="12">
+               <mat-form-field appearance="legacy" class="full-width">
+                 <mat-label>Full Name</mat-label>
+                 <input type="text" [(ngModel)]="name"  matInput placeholder="username">
+                 <mat-icon matSuffix>name</mat-icon>
+               </mat-form-field>          
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="12">
+                 <mat-form-field appearance="legacy" class="full-width">
+                   <mat-label>Phone Number</mat-label>
+                   <input type="phone" [(ngModel)]="phone"  matInput placeholder="Phone Number">
+                   <mat-icon matSuffix>phone</mat-icon>
+                 </mat-form-field>          
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="12">
+                 <mat-form-field appearance="legacy" class="full-width">
+                   <mat-label>Email</mat-label>
+                   <input type="email" [(ngModel)]="email"  matInput placeholder="Doctor Registeration Number">
+                   <mat-icon matSuffix>email</mat-icon>
+                 </mat-form-field>          
+                </ion-col>
+              </ion-row> 
+              <ion-row>
+                  <ion-col size="12">
+                   <mat-form-field appearance="legacy" class="full-width">
+                     <mat-label>Username</mat-label>
+                     <input type="text" [(ngModel)]="username"  matInput placeholder="name">
+                     <mat-icon matSuffix>face</mat-icon>
+                   </mat-form-field>          
+                  </ion-col>
+                </ion-row>
+          
+                  <ion-row>
+                      <ion-col size="12">
+                       <mat-form-field appearance="legacy" class="full-width">
+                         <mat-label>Doctor Registeration Number</mat-label>
+                         <input type="text" [(ngModel)]="registerNumber"  matInput placeholder="Doctor Registeration Number">
+                         <mat-icon matSuffix>face</mat-icon>
+                       </mat-form-field>          
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col size="12">
+                       <mat-form-field appearance="legacy" class="full-width">
+                          <mat-label>Password</mat-label>
+                        <input matInput [(ngModel)]="password"  placeholder="Enter your password" [type]="hide ? 'text' : 'password'">
+                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                       </mat-form-field>          
+                      </ion-col>
+                    </ion-row> 
+                    
+                    <ion-row class="vertical-align-center">
+                        <ion-col size="12" text-center>
+                            <button mat-raised-button (click)="nextSlide()" color="warn" class="full-width">Create</button>
+                         </ion-col> 
+                      </ion-row>
+                                
+      </ion-grid>
+    </ion-slide>
+
+    <!-- Accept terms and Policy Slide -->
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <iframe>
+
+            </iframe>
+          </ion-col>
+        </ion-row>
+     
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+
+</div>
+
+<ion-footer *ngIf="slideNumber === 1">
+  <ion-grid>
+      <ion-row>
+          <ion-col size="12" text-center>
+              <button mat-raised-button (click)="createAccount()" color="success" class="full-width">
+                Accepts Terms and Policy
+              </button>
+          </ion-col>
+        </ion-row>
+  </ion-grid>
+</ion-footer>
+

@@ -1,0 +1,42 @@
+<ion-header no-border>
+    <app-profile-header></app-profile-header>
+</ion-header>
+<ion-content >
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12">
+                <app-profile-img *ngIf="isReady"
+                    [image]="doctorCustom.doctor !== undefined?doctorCustom.doctor.image:undefined"
+                    [imageContentType]="doctorCustom.doctor !== undefined?doctorCustom.doctor.imageContentType:undefined"
+                    [defaultImage]="'/assets/doctor.png'"
+                    
+                    (imageSelectedEvent)="updateProfileImage($event)"
+                ></app-profile-img>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" >
+                <app-profile-review *ngIf="isReady"
+                    [totalRating]="doctorCustom.doctor.totalRating"
+                    [totalReview] = "'45'"
+                    [totalConsultation]="'98'"
+                ></app-profile-review>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" >
+                <app-profile-details *ngIf="isReady" 
+                    [doctorCustom]="doctorCustom"
+                
+                    (doctorUpdated)="updateDoctorDetails($event)"
+                    (qualificationDeleted)="deleteDoctorQualification($event)"
+                    (workplaceDeleted)="deleteDoctorWorkPlace($event)"
+                    (qualificatioAdded)="addDoctorQualification($event)"
+                    (workplaceAdded)="addDoctorWorkplace($event)"
+                    (workplaceUpdated)="updateDoctorWorkplace($event)"
+                    >
+                </app-profile-details>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

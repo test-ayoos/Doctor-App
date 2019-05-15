@@ -1,0 +1,32 @@
+<ion-content>
+  
+  <ion-grid class=" light-blue">
+    <ion-row>
+      <ion-img src="/assets/logo.png"></ion-img>
+    </ion-row>
+    <ion-row  class="absolute" justify-content-center>
+      <ion-col text-right>
+        <ion-button (click)="navigate(loginPage)">Sign In</ion-button>
+      </ion-col>
+      <ion-col text-left>
+       <ion-button (click)="navigate(registerPage)">
+        Register
+       </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div id="wave"></div>
+
+</ion-content>
+
+
+<ion-footer no-border>
+    <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <ion-text>About Us</ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

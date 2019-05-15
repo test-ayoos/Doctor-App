@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+      <ion-title>Sessions</ion-title>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-slides pager="true" *ngIf="isReady">
+    <ion-slide *ngFor="let workplace of workplaces" class="full-height">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">                
+                <ion-item lines="none">
+                  <ion-thumbnail>
+                    <ion-img src="/assets/hospital.png"></ion-img>
+                  </ion-thumbnail>
+                  <ion-text margin>
+                    <h2>{{workplace.name}}</h2>
+                    <p>{{workplace.location}}</p>
+                    <app-rating [rating]="3"></app-rating>
+
+                  </ion-text>
+                </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+        </ion-row>
+
+          <ion-row >
+            <ion-col *ngFor="let day of days">
+                <app-expandable [header]="day" 
+                [arr]="workplaceSessionsObj[workplace.id][days.indexOf(day)]" 
+                [errMsg]="'No Session Set For ' + day"
+                (iconAdd)="createSession(workplace , day , days.indexOf(day))"
+                ></app-expandable>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

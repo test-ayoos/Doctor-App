@@ -1,0 +1,10 @@
+<ion-item>
+    <!-- <ion-label position="fixed">{{labelName}}</ion-label> -->
+    <ion-input #customInput color="dark" [(ngModel)]="value"  
+    class="form-control" 
+    (blur)="onBlur()"
+    value="{{defaultValue}}"
+    placeholder="{{placeholder}}"
+    ></ion-input>
+      <ion-icon name="create" (click)="setFocus()"></ion-icon>
+</ion-item>

@@ -1,0 +1,51 @@
+<mat-toolbar color="primary">
+
+    <mat-toolbar-row>
+      <ion-buttons>
+        <ion-button (click)="cancel()">
+          <ion-icon name="close" ></ion-icon>
+        </ion-button>    
+      </ion-buttons>
+      <ion-title>Add Workplace</ion-title>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+              <mat-form-field  class="full-width">
+                  <input matInput type="text" placeholder="Clinic / Hospital Name" [(ngModel)]="clinicName">
+                  <mat-icon matSuffix>local_hospital</mat-icon>
+              </mat-form-field>    
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <mat-form-field  class="full-width">
+                  <input matInput type="text" placeholder="Location" [(ngModel)]="searchTerm" (input)="onSearch()">
+                  <mat-icon matSuffix>add_location</mat-icon>
+              </mat-form-field>   
+       </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <hr/>
+   
+      <ion-item *ngFor="let option of values">
+          <ion-label (click)="select(option)">{{option.description}}</ion-label>
+        </ion-item>  
+
+</ion-content>
+<ion-footer>
+ <ion-grid>
+   <ion-row>
+    <ion-col>
+      <ion-button expand="block" fill="outline" color="danger" (click)="cancel()">Cancel</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button expand="block" fill="outline" (click)="dismiss()">Save</ion-button>
+    </ion-col>
+   </ion-row>
+ </ion-grid>
+</ion-footer>

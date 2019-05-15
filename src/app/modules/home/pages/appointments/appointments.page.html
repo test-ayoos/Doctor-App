@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/home/dashboard"
+        text=""
+      ></ion-back-button>
+      <ion-label class="cl-white">Appointments</ion-label>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="confirmed()" *ngIf="isOnSlide1">
+        <ion-icon src="/assets/calendar.svg"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="pending()" *ngIf="!isOnSlide1">
+        <ion-icon src="/assets/confirm.svg"></ion-icon>
+      </ion-button>
+
+      <ion-button>
+        <ion-icon name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-grey">
+
+      <ion-list class="bg-grey">
+
+        <ion-grid>
+          <ion-row  justify-content-center> 
+            <ion-col  size-md="5" size="12">
+                <ion-card no-padding class="ap-card confirm" *ngFor="let a of appointments" (click)="consultation(a)">
+                    <ion-grid no-padding>
+                      <ion-row style="align-items:center">
+                        <ion-col size="3">
+                          <p class="time">today</p>
+                          <p class="time">02:15pm</p>
+                        </ion-col>
+                        <ion-col size="7" text-left class="border-left">
+                          <p class="name">{{a.name}}</p>
+                          <p class="age">28 year old</p>
+                        </ion-col>
+                        <ion-col size="2">
+                          <ion-icon
+                            class="icon-large cl-orange"
+                            src="/assets/tick.svg"
+                          ></ion-icon>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card>
+            </ion-col>
+
+            <ion-col  size-md="5" size="12"></ion-col>
+          </ion-row>
+        </ion-grid> 
+      </ion-list>
+</ion-content>

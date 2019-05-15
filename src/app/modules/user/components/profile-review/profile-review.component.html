@@ -1,0 +1,26 @@
+<div>
+
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col size="4" class="vertical-align-center review">
+        <ion-grid>
+          <ion-row justify-content-center><ion-text>{{totalConsultation}}</ion-text></ion-row>
+          <ion-row class="ion-margin-vertical" justify-content-center><ion-text color="medium">Consultations</ion-text>  </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col size="4" class="vertical-align-center review">
+        <ion-grid>
+          <ion-row justify-content-center><app-rating class="rating-fix" [rating]="totalRating"></app-rating></ion-row>
+          <ion-row class="ion-margin-vertical" justify-content-center><ion-text color="medium">Rating</ion-text></ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col size="4" class="vertical-align-center review">
+          <ion-grid>
+              <ion-row justify-content-center><ion-text>{{totalReview}}</ion-text></ion-row>
+              <ion-row class="ion-margin-vertical" justify-content-center><ion-text color="medium">Reviews</ion-text></ion-row>
+            </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</div>

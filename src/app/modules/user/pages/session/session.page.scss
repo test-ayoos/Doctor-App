@@ -1,0 +1,17 @@
+ion-toolbar {
+    --background:#275ae7;
+    color: white;
+}
+
+.vertical-align-center {
+
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+
+ion-slide.full-height {
+    min-height: 90vh;
+    align-items: flex-start;
+}

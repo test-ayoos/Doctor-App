@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+
+  <mat-toolbar-row >
+
+        <ion-avatar *ngIf="profileImage"  class="header-icon profile-icon" (click)="navigate(profilePage)">
+            <img [src]="'data:' +  profileImageType
+            + ';base64,' + profileImage
+            "> 
+        </ion-avatar>
+
+        <ion-icon *ngIf="!profileImage" (click)="navigate(profilePage)" class="header-icon" name="contact"></ion-icon>
+
+        <div class="notification-div">
+            <ion-icon name="notifications" class="header-icon ion-margin-horizontal" (click)="navigate(notificationPage)"></ion-icon>
+            <ion-badge color="danger">45</ion-badge>
+        </div>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>

@@ -1,0 +1,50 @@
+ion-fab {
+    position: fixed;
+    top: 6vw;
+    right: 6vw;
+}
+
+ion-col {height: auto;}
+
+.qualification-row {
+    border: 1px solid grey;
+    padding: 10px 10px;
+    margin-top: 10px;
+}
+
+.qualification-row ion-col {
+    padding: 0px;
+    margin: 7px 7px;
+}
+
+input[type="date"] {
+
+    width: 40px;
+}
+
+.sd-container {
+    position: relative;
+    float: left;
+  }
+  
+  .sd {
+    border: 1px solid #1cbaa5;
+    padding: 5px 10px;
+    height: 30px;
+    width: 150px;
+  }
+  
+  .open-button {
+    position: absolute;
+    top: 10px;
+    right: 3px;
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    pointer-events: none;
+  }
+  
+  .open-button ion-icon {
+    border: none;
+    background: transparent;
+  }

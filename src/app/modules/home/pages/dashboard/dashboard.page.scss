@@ -1,0 +1,45 @@
+// Functions
+
+@function tint($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+
+//Styles
+
+ion-content {
+    --background:#dedddd;
+}
+
+iom-grid.main {
+    margin: 2vw;
+}
+
+ion-row.dashboard , ion-col.dashboard {
+
+    margin: 2vw 2vw;
+    background: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+ion-col.dashboard {
+    min-height: 40vw;
+}
+
+img.big {
+
+    width: 15vw;
+    height: 15vw;
+}
+
+ion-icon.dashboard {
+    width:10vw;
+    height: 10vw;
+}
+
+ion-icon.big {
+    width: 15vw;
+    height: 15vw;
+}
+
+
+

@@ -1,0 +1,22 @@
+div {
+    width: 100vw;
+}
+p {
+    margin: 0px;
+    font-size: 15px;
+}
+
+ion-grid {
+    width: 90vw;
+    border: 1px solid black;
+    padding: 0px;
+    margin-top: 24px;
+}
+
+ion-row.header {
+    background: lightgray
+}
+
+ion-row {
+  height:50px;
+}

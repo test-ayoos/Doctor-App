@@ -1,0 +1,144 @@
+<ion-header no-border>
+    <app-header *ngIf="doctorCustom.doctor != undefined" profilePage="{{profilePage}}"
+        profileImage="{{doctorCustom.doctor.image}}" 
+        profileImageType="{{doctorCustom.doctor.imageContentType}}">
+    </app-header>
+    <app-header *ngIf="doctorCustom.doctor == undefined" profilePage="{{profilePage}}"></app-header>
+</ion-header>
+<ion-content *ngIf="isReady">
+
+    <ion-grid class="main">
+
+        <ion-row class="dashboard"  color="primary" [routerLink]="'/home/appointments'">
+
+            <ion-col size="12">
+
+                <ion-grid no-margin>
+                    <ion-row class="vertical-align-center">
+                        <ion-col  class="vertical-align-center">
+                           <ion-icon class="dashboard" src="/assets/dashboard.svg"></ion-icon>
+                        </ion-col>
+                        <ion-col size="10">
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-text>
+                                            <h4>Appointments</h4>
+                                        </ion-text>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col>You have 32 new Appointments</ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+            </ion-col>
+
+        </ion-row>
+
+        <ion-row>
+
+            <ion-col class="dashboard vertical-align-center">
+                <ion-grid>
+                    <ion-row class="vertical-align-center">
+                        <ion-col class="vertical-align-center">
+                            <!-- <img src="/assets/eye.png" class="dashboard"/>-->
+                            <img src="/assets/eye.svg" class="big"/>
+                        </ion-col>
+                            
+                    </ion-row >
+                    <ion-row class="vertical-align-center">
+                        <ion-col class="vertical-align-center">
+                                <ion-text><h4>Visits</h4></ion-text>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+
+            <ion-col class="dashboard vertical-align-center">
+                    <ion-grid>
+                        <ion-row class="vertical-align-center">
+                            <ion-col class="vertical-align-center">
+                                    <img src="/assets/patient.gif" class="dashboard big"/>
+                            </ion-col>
+                                        
+                        </ion-row>
+                        <ion-row class="vertical-align-center">
+                                <ion-col class="vertical-align-center">
+                                    <ion-text><h4>Patients</h4></ion-text>
+                                </ion-col>
+                        </ion-row>
+                    </ion-grid>
+            </ion-col>
+
+        </ion-row>
+        <ion-row>
+
+                <ion-col class="dashboard vertical-align-center" [routerLink]="'/user/session'">
+                    <ion-grid>
+                        <ion-row class="vertical-align-center">
+                                <ion-col class="vertical-align-center">
+                                    <img src="/assets/time.gif" class="dashboard big"/> 
+                                </ion-col>          
+                        </ion-row>
+                        <ion-row class="vertical-align-center">
+                            <ion-col class="vertical-align-center"><ion-text><h4>Session</h4></ion-text></ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-col>
+    
+                <ion-col class="dashboard vertical-align-center">
+                        <ion-grid>
+                            <ion-row class="vertical-align-center">
+                                <ion-col class="vertical-align-center">
+                                        <img src="/assets/settings.gif" class="dashboard big"/>        
+                                    </ion-col>
+                            </ion-row>
+                            <ion-row class="vertical-align-center">
+                                    <ion-col class="vertical-align-center">
+                                            <ion-text><h4>Settings</h4></ion-text>    
+                                    </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                </ion-col>
+    
+            </ion-row>
+        
+
+
+        <ion-row class="dashboard">
+
+                <ion-col size="12">
+    
+                    <ion-grid no-margin [routerLink]="'/user/review'">
+                        <ion-row class="vertical-align-center">
+                            <ion-col  class="vertical-align-center">
+                                    <img src="/assets/rating.png" class="dashboard"/>     
+                            </ion-col>
+                            <ion-col size="10">
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col>
+                                            <ion-text>
+                                                <h4>Feedback / Review</h4>
+                                            </ion-text>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col>23 people Reviewed Your Profile</ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+    
+                </ion-col>
+    
+            </ion-row>
+
+    </ion-grid>
+
+</ion-content>
