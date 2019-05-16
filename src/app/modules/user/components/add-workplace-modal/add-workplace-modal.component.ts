@@ -29,7 +29,7 @@ export class AddWorkplaceModalComponent implements OnInit {
   ngOnInit() {
     if(this.workPlace.id !== undefined) {
 
-        this.searchTerm = this.workPlace.location;
+        this.searchTerm = this.workPlace.locationName;
         this.clinicName = this.workPlace.name;
     }
   }
@@ -62,21 +62,29 @@ export class AddWorkplaceModalComponent implements OnInit {
 
   dismiss() {
 
-    if (this.workPlace.id === undefined) {
-      const workplace: WorkPlaceDTO = {};
+    if(this.workPlace.id === undefined) {
+      const workplace : WorkPlaceDTO= {}
       workplace.name = this.clinicName;
-      this.locationService.geocodeAddress(this.place.place_id)
-      .then(data => {
-        workplace.location = data;
-        console.log(data);
-      });
-      this.log.log(this.searchTerm);
-      this.modalController.dismiss(workplace);
-    } else {
+      workplace.locationName = this.searchTerm;
+      console.log(workplace);
+      this.locationService.geocodeAddress()
+      .then(geocoder => {
+          geocoder.geocode({placeId: this.place.place_id}, (results, status) => {
+          if (status !== 'OK') {
+            console.log('Geocoder failed due to: ' + status);
+            return;
+          }
+    
+          let latlon = [results[0].geometry.location.lat(), results[0].geometry.location.lng()];
+          console.log('Lat is inside geo ' + results[0].geometry.location.lat());
+          console.log('Lon is inside geo ' + results[0].geometry.location.lng());
 
-      this.workPlace.name = this.clinicName;
-      this.workPlace.location = this.searchTerm;
-      this.modalController.dismiss(this.workPlace);
+          workplace.location = latlon.toString();
+          console.log('Workplace' , workplace);
+          this.modalController.dismiss(workplace);
+          
+          });
+      })
     }
   }
 

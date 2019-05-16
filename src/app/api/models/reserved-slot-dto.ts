@@ -5,4 +5,5 @@ export interface ReservedSlotDTO {
   endTime?: number;
   id?: number;
   startTime?: number;
+  tokenNumber?: number;
 }

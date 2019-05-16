@@ -25,7 +25,7 @@ export class RegisterPage implements OnInit {
   email = '';
   phone: number;
   agreement: boolean;
-  registerNumber: number;
+  registerNumber: string;
 
   loginPage = '';
 
@@ -51,6 +51,8 @@ export class RegisterPage implements OnInit {
       username: this.username
     };
 
+    console.log(user);
+
     this.keyCloakService.createAccount(user , this.password)
     .then(
       () => {
@@ -58,7 +60,11 @@ export class RegisterPage implements OnInit {
         this.keyCloakService.authenticate(user.username , this.password)
         .then(() => {
           const doctor: DoctorDTO = {};
-          doctor.doctorId = user.username;
+          doctor.doctorId = this.username;
+          doctor.firstName = this.name
+          doctor.email = this.email;
+          doctor.phoneNumber = this.phone;
+          doctor.registerNumber = this.registerNumber;
           this.commandResourceService
           .createDoctorUsingPOST(doctor)
           .subscribe(data => {

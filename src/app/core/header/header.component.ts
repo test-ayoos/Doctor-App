@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   @Input() profileImageType;
   @Input() profilePage: string;
 
+
   @Input() notificationPage: string;
 
   constructor(

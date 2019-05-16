@@ -1,3 +1,4 @@
+import { diseases } from './../../../../core/mocks/disease.mock';
 import { LocalStorageService } from './../../../../core/services/local-storage.service';
 import {
   QueryResourceService,
@@ -11,10 +12,12 @@ import {
   IonButton,
   LoadingController,
   AlertController,
-  Platform
+  Platform,
+  NavController
 } from '@ionic/angular';
 import { ParamedicalExaminationRequest, ConsultationRequest } from 'src/app/api/models';
 import { File } from '@ionic-native/file/ngx';
+import { symptoms } from 'src/app/core/mocks/symptoms';
 
 @Component({
   selector: 'app-consultation',
@@ -26,17 +29,10 @@ export class ConsultationPage implements OnInit {
 
   @ViewChild('backButton') backButton: IonButton;
 
-  symptoms: String[] = [
-    'fever',
-    'headeache',
-    'cough',
-  ];
+  
+  symptoms: String[] = [];
 
-  diagnosis: string[] = [
-    'H1N1',
-    'Malaria',
-    'Nipa'
-  ];
+  diagnosis: string[] = [];
 
   prescription: {
     taskId: string;
@@ -82,12 +78,19 @@ export class ConsultationPage implements OnInit {
     private alertController: AlertController,
     private localStorage: LocalStorageService,
     public modalCtrl: ModalController ,
+    private navController: NavController,
     private file: File,
     private platform: Platform
   ) {}
 
   ngOnInit() {
     this.slides.lockSwipes(true);
+    for(let disease of diseases) {
+      this.diagnosis.push(disease.name);
+    }
+    for(let symptom of symptoms) {
+      this.symptoms.push(symptom.name);
+    }
   }
 
   async createLoader() {
@@ -162,6 +165,7 @@ export class ConsultationPage implements OnInit {
 
   async startConsultation() {
     this.createLoader().then(() => {
+      this.loading.present();
       this.commandResourceService
         .initiateUsingPOST({
           token: this.token
@@ -222,8 +226,8 @@ export class ConsultationPage implements OnInit {
       this.taskId =  data.data[0].id;
       console.log('Got new taskid' , data.data[0].id);
       const date = new Date();
-      this.consultationInfo.evaluation = this.diagnosisSelect[0];
-      this.consultationInfo.symptom = this.symptomsSelect[0];
+      this.consultationInfo.evaluation = this.diagnosisSelect;
+      this.consultationInfo.symptom = this.symptomsSelect;
       this.consultationInfo.examinationRequired = 'no';
       // "mm-day-year hh:mm"
       this.consultationInfo.date = date.getMonth() + '-' + date.getUTCDay() + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
@@ -251,15 +255,16 @@ export class ConsultationPage implements OnInit {
     const path = '';
 
     console.log('Save Prescription');
-    for (const p of this.prescription) {
-      p.taskId = this.taskId;
 
-      // if(this.platform.is('ios')) {
-      //   path = this.file.documentsDirectory
-      // } else {
-      //   path = this.file.
-      // }
-    }
+    this.commandResourceService.collectPrescriptionInformationsUsingPOST(
+      {
+        taskId: this.taskId,
+        prescriptionRequest: this.prescription
+      })
+      .subscribe((data) => {
+        console.log(data);
+        this.next();
+      })
   }
 
   downloadPrescription() {
@@ -271,6 +276,10 @@ export class ConsultationPage implements OnInit {
         console.log(va);
       });
     });
+  }
+
+  completeConsultation() {
+    this.navController.navigateBack('/home/appointments');
   }
 
   changeHeader() {

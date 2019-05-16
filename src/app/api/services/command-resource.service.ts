@@ -10,6 +10,7 @@ import { map as __map, filter as __filter } from 'rxjs/operators';
 import { ConsultationRequest } from '../models/consultation-request';
 import { DefaultInfoRequest } from '../models/default-info-request';
 import { ParamedicalExaminationRequest } from '../models/paramedical-examination-request';
+import { PrescriptionRequest } from '../models/prescription-request';
 import { ContactInfoDTO } from '../models/contact-info-dto';
 import { DoctorDTO } from '../models/doctor-dto';
 import { InitiateMedicalSummaryRequest } from '../models/initiate-medical-summary-request';
@@ -40,8 +41,8 @@ class CommandResourceService extends __BaseService {
   static readonly updateQualificationUsingPUTPath = '/api/commands/qualifications';
   static readonly deleteQualificationUsingDELETEPath = '/api/commands/qualifications';
   static readonly createSessionInfoUsingPOSTPath = '/api/commands/sessionInfo';
-  static readonly createSlotUsingPOSTPath = '/api/commands/slot/{date}';
-  static readonly uploadPrescriptionUsingPOSTPath = '/api/commands/upload-prescription';
+  static readonly createSlotUsingPOSTPath = '/api/commands/slot/{date}/{doctorId}';
+  static readonly uploadPrescriptionUsingPOSTPath = '/api/commands/upload-File';
   static readonly createWorkPlaceUsingPOSTPath = '/api/commands/work-places';
   static readonly updateWorkPlaceUsingPUTPath = '/api/commands/work-places';
   static readonly deleteWorkPlaceUsingDELETEPath = '/api/commands/work-places';
@@ -187,23 +188,14 @@ class CommandResourceService extends __BaseService {
    *
    * - `taskId`: taskId
    *
-   * - `period`:
-   *
-   * - `frequency`:
-   *
-   * - `drug`:
-   *
-   * - `dose`:
+   * - `prescriptionRequest`: prescriptionRequest
    */
   collectPrescriptionInformationsUsingPOSTResponse(params: CommandResourceService.CollectPrescriptionInformationsUsingPOSTParams): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
-    if (params.period != null) __params = __params.set('period', params.period.toString());
-    if (params.frequency != null) __params = __params.set('frequency', params.frequency.toString());
-    if (params.drug != null) __params = __params.set('drug', params.drug.toString());
-    if (params.dose != null) __params = __params.set('dose', params.dose.toString());
+    __body = params.prescriptionRequest;
     let req = new HttpRequest<any>(
       'POST',
       this.rootUrl + `/api/commands/collect-Prescription-Info/${params.taskId}`,
@@ -226,13 +218,7 @@ class CommandResourceService extends __BaseService {
    *
    * - `taskId`: taskId
    *
-   * - `period`:
-   *
-   * - `frequency`:
-   *
-   * - `drug`:
-   *
-   * - `dose`:
+   * - `prescriptionRequest`: prescriptionRequest
    */
   collectPrescriptionInformationsUsingPOST(params: CommandResourceService.CollectPrescriptionInformationsUsingPOSTParams): __Observable<null> {
     return this.collectPrescriptionInformationsUsingPOSTResponse(params).pipe(
@@ -641,17 +627,23 @@ class CommandResourceService extends __BaseService {
   }
 
   /**
-   * @param date date
+   * @param params The `CommandResourceService.CreateSlotUsingPOSTParams` containing the following parameters:
+   *
+   * - `doctorId`: doctorId
+   *
+   * - `date`: date
+   *
    * @return OK
    */
-  createSlotUsingPOSTResponse(date: string): __Observable<__StrictHttpResponse<Array<ReservedSlotDTO>>> {
+  createSlotUsingPOSTResponse(params: CommandResourceService.CreateSlotUsingPOSTParams): __Observable<__StrictHttpResponse<Array<ReservedSlotDTO>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
+
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/api/commands/slot/${date}`,
+      this.rootUrl + `/api/commands/slot/${params.date}/${params.doctorId}`,
       __body,
       {
         headers: __headers,
@@ -667,19 +659,25 @@ class CommandResourceService extends __BaseService {
     );
   }
   /**
-   * @param date date
+   * @param params The `CommandResourceService.CreateSlotUsingPOSTParams` containing the following parameters:
+   *
+   * - `doctorId`: doctorId
+   *
+   * - `date`: date
+   *
    * @return OK
    */
-  createSlotUsingPOST(date: string): __Observable<Array<ReservedSlotDTO>> {
-    return this.createSlotUsingPOSTResponse(date).pipe(
+  createSlotUsingPOST(params: CommandResourceService.CreateSlotUsingPOSTParams): __Observable<Array<ReservedSlotDTO>> {
+    return this.createSlotUsingPOSTResponse(params).pipe(
       __map(_r => _r.body as Array<ReservedSlotDTO>)
     );
   }
 
   /**
    * @param file file
+   * @return OK
    */
-  uploadPrescriptionUsingPOSTResponse(file: Blob): __Observable<__StrictHttpResponse<null>> {
+  uploadPrescriptionUsingPOSTResponse(file: Blob): __Observable<__StrictHttpResponse<string>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -689,27 +687,28 @@ class CommandResourceService extends __BaseService {
    if(file !== null && typeof file !== "undefined") { __formData.append('file', file as string | Blob);}
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/api/commands/upload-prescription`,
+      this.rootUrl + `/api/commands/upload-File`,
       __body,
       {
         headers: __headers,
         params: __params,
-        responseType: 'json'
+        responseType: 'text'
       });
 
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<null>;
+        return _r as __StrictHttpResponse<string>;
       })
     );
   }
   /**
    * @param file file
+   * @return OK
    */
-  uploadPrescriptionUsingPOST(file: Blob): __Observable<null> {
+  uploadPrescriptionUsingPOST(file: Blob): __Observable<string> {
     return this.uploadPrescriptionUsingPOSTResponse(file).pipe(
-      __map(_r => _r.body as null)
+      __map(_r => _r.body as string)
     );
   }
 
@@ -879,10 +878,11 @@ module CommandResourceService {
      * taskId
      */
     taskId: string;
-    period?: string;
-    frequency?: string;
-    drug?: string;
-    dose?: string;
+
+    /**
+     * prescriptionRequest
+     */
+    prescriptionRequest: Array<PrescriptionRequest>;
   }
 
   /**
@@ -899,6 +899,22 @@ module CommandResourceService {
      * monthList
      */
     monthList: Array<number>;
+  }
+
+  /**
+   * Parameters for createSlotUsingPOST
+   */
+  export interface CreateSlotUsingPOSTParams {
+
+    /**
+     * doctorId
+     */
+    doctorId: number;
+
+    /**
+     * date
+     */
+    date: string;
   }
 }
 
