@@ -279,7 +279,7 @@ export class ConsultationPage implements OnInit {
   }
 
   completeConsultation() {
-    this.navController.navigateBack('/home/appointments');
+    this.modalCtrl.dismiss();
   }
 
   changeHeader() {

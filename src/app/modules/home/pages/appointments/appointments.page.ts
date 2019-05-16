@@ -22,7 +22,7 @@ export class AppointmentsPage implements OnInit {
 
   token: string ="989898";
 
-  appointments: any[] = [{name: 'Patient 1' , bookingTime: '12:30' }];
+  appointments: any[] = [{name: 'Patient 1' , bookingTime: '12:30' , age: 23 }];
 
   constructor(
     public modalController: ModalController ,
