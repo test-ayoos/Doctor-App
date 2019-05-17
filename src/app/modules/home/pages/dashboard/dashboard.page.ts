@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController, LoadingController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { LogService } from 'src/app/core/services/log.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -54,7 +55,10 @@ export class DashboardPage implements OnInit {
         });
       });
     });
+
+    console.log('sgshgshghsghgshgshghsghsghgshg');
   }
+
 
   getCurrentDoctorWorkplaces() {
    

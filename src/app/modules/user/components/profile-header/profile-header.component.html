@@ -1,10 +1,13 @@
-<mat-toolbar color="primary">
+<ion-toolbar color="primary">
 
-    <mat-toolbar-row>
-        <ion-buttons>
-            <ion-back-button></ion-back-button>
-        </ion-buttons>
+    <ion-buttons>
+        <ion-button (click)="goBack()">
+            <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
         <ion-title>My Profile</ion-title>
-    </mat-toolbar-row>
+        <ion-button (click)="logout()">
+            <ion-icon name="power" ></ion-icon>
+        </ion-button>
+    </ion-buttons>
 
-</mat-toolbar>
+</ion-toolbar>

@@ -31,7 +31,7 @@ import StorageService from './services/storage.service';
       serverLogLevel: NgxLoggerLevel.OFF
     }),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCQc2iiem96Es76TEOcPkcSvfHx5wpvs28',
+      apiKey: 'AIzaSyAUlvH09qvfqTyR6izVneDPXEzDyHcIB-0',
       libraries: ['places', 'geometry']
     })
   ],

@@ -62,6 +62,7 @@ export class ProfilePage implements OnInit {
           this.localStorage.getItem('qualifications')
           .subscribe(qualifications => {
             this.doctorCustom.qualifications = JSON.parse(qualifications);
+            console.log(this.doctorCustom.qualifications);
             this.localStorage.getItem('workplaces')
             .subscribe(workplaces => {
               this.doctorCustom.workplaces = JSON.parse(workplaces);
@@ -169,7 +170,15 @@ export class ProfilePage implements OnInit {
     .createQualificationUsingPOST(qualification)
     .subscribe(data => {
       this.log.log(data);
-      this.doctorService.updateCurrentDoctorQualifications();
+      this.localStorage.getItem('kuser')
+      .subscribe(
+        data => {
+
+          this.doctorService.getCurrentDoctorQualification(JSON.parse(data).preferred_username,
+            (qualifications => {this.localStorage.setItem('qualifications' , JSON.stringify(qualifications));
+            }));
+        }
+      )
     });
   }
 

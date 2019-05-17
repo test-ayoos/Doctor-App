@@ -126,8 +126,10 @@ export class DoctorService {
   updateCurrentDoctorQualifications() {
    this.localStorage.getItem('doctor')
    .subscribe(doc => {
+     console.log(JSON.parse(doc).doctorId);
     this.queryResourceService.findAllQualificationUsingGET(JSON.parse(doc).doctorId)
     .subscribe(qualifications => {
+      console.log('Got Qualifications' , qualifications);
       this.localStorage.setItem('qualifications' , JSON.stringify(qualifications));
     })
    })

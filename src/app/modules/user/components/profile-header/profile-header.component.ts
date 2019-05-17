@@ -1,3 +1,5 @@
+import { NavController } from '@ionic/angular';
+import { KeycloakService } from './../../../../core/services/keycloak.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,8 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private keycloakService: KeycloakService,
+    private navController: NavController
+  ) { }
 
   ngOnInit() {}
+
+  logout() {
+    console.log("Logging Out");
+    this.keycloakService.logout();
+  }
+
+  goBack() {
+    this.navController.navigateBack('/home/dashboard');
+  }
 
 }

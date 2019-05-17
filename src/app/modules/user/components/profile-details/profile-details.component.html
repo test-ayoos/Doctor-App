@@ -31,9 +31,9 @@
        </ion-col>
        <ion-col size="12">
         <app-custom-input
-         ngModel
+         [(ngModel)]="doctorCustom.doctor.phoneNumber"
          [placeholder]="'Phone Number'"
-         [defaultValue]="71676176176"
+         [defaultValue]="doctorCustom.doctor.phoneNumber"
          [labelName]="'Number'"
         ></app-custom-input>
      </ion-col>
@@ -92,7 +92,7 @@
           </ion-thumbnail>
           <ion-label (click)="updateWorkplace(workplace)">
               <h2>{{workplace.name}}</h2>
-              <p>{{workplace.location}}</p>
+              <p>{{workplace.locationName}}</p>
           </ion-label>
           <ion-icon name="trash" (click)="deleteWorkplaceEvent(workplace.id)"></ion-icon>
         </ion-item>

@@ -1,3 +1,4 @@
+import { diseases } from './../../../../core/mocks/disease.mock';
 import { LocalStorageService } from './../../../../core/services/local-storage.service';
 import {
   QueryResourceService,
@@ -11,7 +12,8 @@ import {
   IonButton,
   LoadingController,
   AlertController,
-  Platform
+  Platform,
+  NavController
 } from '@ionic/angular';
 import { ParamedicalExaminationRequest, ConsultationRequest } from 'src/app/api/models';
 import { File, IWriteOptions } from '@ionic-native/file/ngx';
@@ -22,6 +24,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import * as blobUtil from 'blob-util';
 import { stringify } from 'querystring';
 
+import { symptoms } from 'src/app/core/mocks/symptoms';
 
 @Component({
   selector: 'app-consultation',
@@ -35,17 +38,10 @@ export class ConsultationPage implements OnInit {
 
   @ViewChild('backButton') backButton: IonButton;
 
-  symptoms: String[] = [
-    'fever',
-    'headeache',
-    'cough',
-  ];
 
-  diagnosis: string[] = [
-    'H1N1',
-    'Malaria',
-    'Nipa'
-  ];
+  symptoms: String[] = [];
+
+  diagnosis: string[] = [];
 
   prescription: {
     taskId: string;
@@ -91,6 +87,7 @@ export class ConsultationPage implements OnInit {
     private alertController: AlertController,
     private localStorage: LocalStorageService,
     public modalCtrl: ModalController ,
+    private navController: NavController,
     private file: File,
     private platform: Platform,
     private fileTransfer: FileTransfer,
@@ -100,6 +97,12 @@ export class ConsultationPage implements OnInit {
 
   ngOnInit() {
     this.slides.lockSwipes(true);
+    for(let disease of diseases) {
+      this.diagnosis.push(disease.name);
+    }
+    for(let symptom of symptoms) {
+      this.symptoms.push(symptom.name);
+    }
   }
 
   async createLoader() {
@@ -174,6 +177,7 @@ export class ConsultationPage implements OnInit {
 
   async startConsultation() {
     this.createLoader().then(() => {
+      this.loading.present();
       this.commandResourceService
         .initiateUsingPOST({
           token: this.token
@@ -263,15 +267,16 @@ export class ConsultationPage implements OnInit {
     const path = '';
 
     console.log('Save Prescription');
-    for (const p of this.prescription) {
-      p.taskId = this.taskId;
 
-      // if(this.platform.is('ios')) {
-      //   path = this.file.documentsDirectory
-      // } else {
-      //   path = this.file.
-      // }
-    }
+    this.commandResourceService.collectPrescriptionInformationsUsingPOST(
+      {
+        taskId: this.taskId,
+        prescriptionRequest: this.prescription
+      })
+      .subscribe((data) => {
+        console.log(data);
+        this.next();
+      })
   }
 
   downloadPrescription() {
@@ -279,7 +284,7 @@ export class ConsultationPage implements OnInit {
     .subscribe((str: any) => {
       this.file.createFile(this.file.externalCacheDirectory, 'temp.pdf', true).then(() => {
         console.log('file created' + str);
-       
+
         this.file.writeFile(this.file.externalCacheDirectory, 'temp.pdf', str , {
           replace: true,
 
@@ -306,7 +311,12 @@ byteToUint8Array(byteArray) {
 
 
 
-changeHeader() {
+
+  completeConsultation() {
+    this.modalCtrl.dismiss();
+  }
+
+  changeHeader() {
     this.slides.getActiveIndex().then(res => {
       console.log(res);
 

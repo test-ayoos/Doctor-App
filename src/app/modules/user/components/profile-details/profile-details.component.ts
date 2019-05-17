@@ -63,6 +63,8 @@ export class ProfileDetailsComponent implements OnInit {
   saveDoctor() {
 
     this.doctorCustom.doctor.practiceSince = moment.parseZone(this.practiceDate).format().toString();
+    this.doctorCustom.doctor.firstName = this.doctorCustom.userKeycloak.name;
+    this.doctorCustom.doctor.email = this.doctorCustom.userKeycloak.email;
     this.doctorUpdated.emit(
       this.doctorCustom
     );

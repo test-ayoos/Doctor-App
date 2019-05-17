@@ -71,21 +71,9 @@ export class LocationService implements OnInit {
 
   }
 
-  async geocodeAddress(place_id: string) {
+  async geocodeAddress() {
     this.geocoder = new google.maps.Geocoder;
-    let latlon = [];
-    console.log('dhgshghsgdhgsgdhg ' ,place_id);
-    return await this.geocoder.geocode({placeId: place_id}, (results, status) => {
-      if (status !== 'OK') {
-        console.log('Geocoder failed due to: ' + status);
-        return;
-      }
-
-      latlon = [results[0].geometry.location.lat(), results[0].geometry.location.lng()];
-      console.log('Lat is inside geo ' + results[0].geometry.location.lat());
-      console.log('Lon is inside geo ' + results[0].geometry.location.lng());
-      return latlon.toString();
-      });
+    return await this.geocoder;
   }
 
   getGeoFromPlace(description) {

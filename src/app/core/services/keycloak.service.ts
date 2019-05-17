@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from './local-storage.service';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class KeycloakService {
 
   constructor(
     private oauthService: OAuthService, private log: LogService,
+    private navController: NavController,
     private localStorage: LocalStorageService
   ) {
     this.kcAdminClient = new KeycloakAdminClient();
@@ -88,6 +90,8 @@ export class KeycloakService {
   }
 
   logout() {
-    this.oauthService.logOut();
+    this.oauthService.logOut()
+    this.localStorage.clear();
+    this.navController.navigateForward('');
   }
 }

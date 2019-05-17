@@ -54,19 +54,19 @@
 
        <ion-row margin>
           <ion-col class="flex-box">
-              <ion-label>Alan harper</ion-label>
+              <ion-label>{{patient.name}}</ion-label>
           </ion-col>
        </ion-row>
 
        <ion-row margin>
           <ion-col class="flex-box">
-              <ion-label>26 Years</ion-label>
+              <ion-label>{{patient.age}} yrs Old</ion-label>
           </ion-col>
        </ion-row>
 
        <ion-row>
           <ion-col class="flex-box">
-              <ion-label>Booked On : 11/12/2019 11:12</ion-label>
+              <ion-label>Booked On : 11/12/2019 {{patient.bookingTime}}</ion-label>
           </ion-col>
         </ion-row>
 
@@ -207,7 +207,52 @@
       </ion-grid>
     </ion-slide>
 
-    <ion-slide>      
+    <ion-slide>    
+      
+        <ion-grid>
+
+            <ion-row >
+    
+              <ion-col class="flex-box">
+    
+                <ion-avatar>
+    
+                  <ion-img src="/assets/fever.png"></ion-img>
+    
+                </ion-avatar>
+    
+              </ion-col>
+    
+            </ion-row>
+    
+           <ion-row margin>
+              <ion-col class="flex-box">
+                  <ion-label>Alan harper</ion-label>
+              </ion-col>
+           </ion-row>
+    
+           <ion-row margin>
+              <ion-col class="flex-box">
+                  <ion-label>26 Years</ion-label>
+              </ion-col>
+           </ion-row>
+    
+           <ion-row>
+              <ion-col class="flex-box">
+                  <ion-label>Booked On : 11/12/2019 11:12</ion-label>
+              </ion-col>
+            </ion-row>
+    
+            <ion-row margin justify-content-center>
+              <ion-col>
+                <ion-text>
+                  <h5>Consultation Completed</h5>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+    
+          </ion-grid>
+      
     </ion-slide>
 
   </ion-slides>
@@ -229,6 +274,12 @@
           <ion-button (click)="savePrescription()" expand="full" color="primary">Save</ion-button>
       </ion-col>
       <ion-col size="6" *ngIf="index == 3">
+          <ion-button expand="full" (click)="downloadPrescription()" color="warning">Print</ion-button>
+      </ion-col>
+      <ion-col size="6" *ngIf="index == 4">
+          <ion-button expand="full" (click)="completeConsultation()" color="warning">Close</ion-button>
+      </ion-col>
+      <ion-col size="6" *ngIf="index == 4">
           <ion-button expand="full" (click)="downloadPrescription()" color="warning">Print</ion-button>
       </ion-col>
     </ion-row>
