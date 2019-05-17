@@ -7,6 +7,7 @@ export { DoctorDTO } from './models/doctor-dto';
 export { InitiateMedicalSummaryRequest } from './models/initiate-medical-summary-request';
 export { PageOfReview } from './models/page-of-review';
 export { ParamedicalExaminationRequest } from './models/paramedical-examination-request';
+export { PrescriptionRequest } from './models/prescription-request';
 export { QualificationDTO } from './models/qualification-dto';
 export { Reply } from './models/reply';
 export { ReservedSlotDTO } from './models/reserved-slot-dto';

@@ -14,7 +14,14 @@ import {
   Platform
 } from '@ionic/angular';
 import { ParamedicalExaminationRequest, ConsultationRequest } from 'src/app/api/models';
-import { File } from '@ionic-native/file/ngx';
+import { File, IWriteOptions } from '@ionic-native/file/ngx';
+import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import * as blobUtil from 'blob-util';
+import { stringify } from 'querystring';
+
 
 @Component({
   selector: 'app-consultation',
@@ -22,6 +29,8 @@ import { File } from '@ionic-native/file/ngx';
   styleUrls: ['./consultation.page.scss']
 })
 export class ConsultationPage implements OnInit {
+
+
   @ViewChild('slides') slides: IonSlides;
 
   @ViewChild('backButton') backButton: IonButton;
@@ -83,7 +92,10 @@ export class ConsultationPage implements OnInit {
     private localStorage: LocalStorageService,
     public modalCtrl: ModalController ,
     private file: File,
-    private platform: Platform
+    private platform: Platform,
+    private fileTransfer: FileTransfer,
+    private documentViewer: DocumentViewer,
+    private fileOpener: FileOpener
   ) {}
 
   ngOnInit() {
@@ -222,8 +234,8 @@ export class ConsultationPage implements OnInit {
       this.taskId =  data.data[0].id;
       console.log('Got new taskid' , data.data[0].id);
       const date = new Date();
-      this.consultationInfo.evaluation = this.diagnosisSelect[0];
-      this.consultationInfo.symptom = this.symptomsSelect[0];
+      this.consultationInfo.evaluation = this.diagnosisSelect;
+      this.consultationInfo.symptom = this.symptomsSelect;
       this.consultationInfo.examinationRequired = 'no';
       // "mm-day-year hh:mm"
       this.consultationInfo.date = date.getMonth() + '-' + date.getUTCDay() + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
@@ -265,15 +277,36 @@ export class ConsultationPage implements OnInit {
   downloadPrescription() {
     this.queryResourceService.getPrescriptionAsPDFUsingGET()
     .subscribe((str: any) => {
-      console.log(str);
-      this.commandResourceService.uploadPrescriptionUsingPOST(str)
-      .subscribe(va => {
-        console.log(va);
-      });
-    });
-  }
+      this.file.createFile(this.file.externalCacheDirectory, 'temp.pdf', true).then(() => {
+        console.log('file created' + str);
+       
+        this.file.writeFile(this.file.externalCacheDirectory, 'temp.pdf', str , {
+          replace: true,
 
-  changeHeader() {
+         }).then(
+          value => {
+            console.log('file writed' + value);
+          });
+        });
+      });
+
+    }
+
+
+
+
+byteToUint8Array(byteArray) {
+    const uint8Array = new Uint8Array(byteArray.length);
+    for (let i = 0; i < uint8Array.length; i++) {
+        uint8Array[i] = byteArray[i];
+    }
+
+    return uint8Array;
+}
+
+
+
+changeHeader() {
     this.slides.getActiveIndex().then(res => {
       console.log(res);
 
@@ -295,7 +328,7 @@ export class ConsultationPage implements OnInit {
     });
   }
 
-  async create() {
+async create() {
     const modal = await this.modalCtrl.create({
       component: PrescriptionComponent,
       cssClass: 'prescriptionModal'
@@ -309,9 +342,9 @@ export class ConsultationPage implements OnInit {
   }
 
 
-  close() {
+close() {
     this.modalCtrl.dismiss();
   }
 
-  async history() {}
+async history() {}
 }
