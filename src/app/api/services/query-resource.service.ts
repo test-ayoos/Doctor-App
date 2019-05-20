@@ -155,7 +155,7 @@ class QueryResourceService extends __BaseService {
   /**
    * @return OK
    */
-  getPrescriptionAsPDFUsingGETResponse(): __Observable<__StrictHttpResponse<string>> {
+  getPrescriptionAsPDFUsingGETResponse(): __Observable<__StrictHttpResponse<unknown>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -166,22 +166,22 @@ class QueryResourceService extends __BaseService {
       {
         headers: __headers,
         params: __params,
-        responseType: 'text'
+        responseType: 'blob'
       });
 
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<string>;
+        return _r as __StrictHttpResponse<unknown>;
       })
     );
   }
   /**
    * @return OK
    */
-  getPrescriptionAsPDFUsingGET(): __Observable<string> {
+  getPrescriptionAsPDFUsingGET(): __Observable<unknown> {
     return this.getPrescriptionAsPDFUsingGETResponse().pipe(
-      __map(_r => _r.body as string)
+      __map(_r => _r.body as Blob)
     );
   }
 

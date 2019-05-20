@@ -97,10 +97,10 @@ export class ConsultationPage implements OnInit {
 
   ngOnInit() {
     this.slides.lockSwipes(true);
-    for(let disease of diseases) {
+    for (const disease of diseases) {
       this.diagnosis.push(disease.name);
     }
-    for(let symptom of symptoms) {
+    for (const symptom of symptoms) {
       this.symptoms.push(symptom.name);
     }
   }
@@ -276,31 +276,128 @@ export class ConsultationPage implements OnInit {
       .subscribe((data) => {
         console.log(data);
         this.next();
-      })
+      });
   }
 
   downloadPrescription() {
-    this.queryResourceService.getPrescriptionAsPDFUsingGET()
-    .subscribe((str: any) => {
-      this.file.createFile(this.file.externalCacheDirectory, 'temp.pdf', true).then(() => {
-        console.log('file created' + str);
 
-        this.file.writeFile(this.file.externalCacheDirectory, 'temp.pdf', str , {
-          replace: true,
+     this.queryResourceService.getPrescriptionAsPDFUsingGET()
+     .subscribe((str: any) => {
 
-         }).then(
-          value => {
+     var blob=str;
+      //var blob = new Blob([arrBuffer], { type: 'application/pdf' });
+
+      console.log("Blob**"+blob.length);
+
+
+      this.file.createFile(this.file.externalCacheDirectory, 'new.pdf', true).then(() => {
+        console.log('file created' + blob);
+
+        this.file.writeFile(this.file.externalCacheDirectory, 'new.pdf', blob,{replace:true}).then(
+          (value) => {
             console.log('file writed' + value);
-          });
+
+            this.documentViewer.viewDocument(this.file.externalCacheDirectory+'new.pdf','application/pdf',{});
+
+
         });
       });
 
-    }
+    });
+  }
 
 
 
 
-byteToUint8Array(byteArray) {
+  // saveAndOpenPdf(pdf: string, filename: string) {
+  //   const writeDirectory = this.platform.is('ios') ? this.file.dataDirectory : this.file.externalDataDirectory;
+  //   this.file.writeFile(writeDirectory, filename, this.convertBase64ToBlob(pdf, 'application/pdf'), {replace: true})
+  //     .then(() => {
+  //         this.loading.dismiss();
+  //         this.opener.open(writeDirectory + filename, 'application/pdf')
+  //             .catch(() => {
+  //                 console.log('Error opening pdf file');
+  //                 this.loading.dismiss();
+  //             });
+  //     })
+  //     .catch(() => {
+  //         console.error('Error writing pdf file');
+  //         this.loading.dismiss();
+  //     });
+  // }
+
+//   convertBaseb64ToBlob(b64Data, contentType): Blob {
+//     contentType = contentType || '';
+//     const sliceSize = 512;
+//     b64Data = b64Data.replace(/^[^,]+,/, '');
+//     b64Data = b64Data.replace(/\s/g, '');
+//     const byteCharacters = window.atob(b64Data);
+//     const byteArrays = [];
+//     for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+//          const slice = byteCharacters.slice(offset, offset + sliceSize);
+//          const byteNumbers = new Array(slice.length);
+//          for (let i = 0; i < slice.length; i++) {
+//              byteNumbers[i] = slice.charCodeAt(i);
+//          }
+//          const byteArray = new Uint8Array(byteNumbers);
+//          byteArrays.push(byteArray);
+//     }
+//    return new Blob(byteArrays, {type: contentType});
+// }
+
+
+ base64ToArrayBuffer(data) {
+
+	var binaryString = data;
+	var binaryLen = binaryString.length;
+	var bytes = new Uint8Array(binaryLen);
+	for (var i = 0; i < binaryLen; i++) {
+		var ascii = binaryString.charCodeAt(i);
+		bytes[i] = ascii;
+	}
+	return bytes;
+}
+
+
+
+
+
+
+  decodeFromUTF(utftext)
+  {
+
+    let string = '';
+    let i = 0;
+    let c, c1, c2, c3;
+    c = c1 = c2 = 0;
+    while (i < utftext.length) {
+        c = utftext.charCodeAt(i);
+
+        if (c < 128) {
+            string += String.fromCharCode(c);
+            i++;
+        } else if ((c > 191) && (c < 224)) {
+            c2 = utftext.charCodeAt(i + 1);
+            string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+            i += 2;
+        } else {
+            c2 = utftext.charCodeAt(i + 1);
+            c3 = utftext.charCodeAt(i + 2);
+            string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+            i += 3;
+        }
+
+    } // Whend
+console.log("conversion done");
+    return string;
+  }
+
+
+
+
+
+
+      byteToUint8Array(byteArray) {
     const uint8Array = new Uint8Array(byteArray.length);
     for (let i = 0; i < uint8Array.length; i++) {
         uint8Array[i] = byteArray[i];
@@ -312,11 +409,11 @@ byteToUint8Array(byteArray) {
 
 
 
-  completeConsultation() {
+      completeConsultation() {
     this.modalCtrl.dismiss();
   }
 
-  changeHeader() {
+      changeHeader() {
     this.slides.getActiveIndex().then(res => {
       console.log(res);
 
@@ -352,7 +449,7 @@ async create() {
   }
 
 
-close() {
+      close() {
     this.modalCtrl.dismiss();
   }
 
