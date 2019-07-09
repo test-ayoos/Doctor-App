@@ -12,11 +12,14 @@ import { DefaultInfoRequest } from '../models/default-info-request';
 import { ParamedicalExaminationRequest } from '../models/paramedical-examination-request';
 import { PrescriptionRequest } from '../models/prescription-request';
 import { ContactInfoDTO } from '../models/contact-info-dto';
+import { DoctorSettingsDTO } from '../models/doctor-settings-dto';
 import { DoctorDTO } from '../models/doctor-dto';
 import { InitiateMedicalSummaryRequest } from '../models/initiate-medical-summary-request';
+import { PaymentSettingsDTO } from '../models/payment-settings-dto';
+import { CommandResource } from '../models/command-resource';
+import { AppointmentConfirmationResponse } from '../models/appointment-confirmation-response';
 import { QualificationDTO } from '../models/qualification-dto';
 import { SessionInfoDTO } from '../models/session-info-dto';
-import { ReservedSlotDTO } from '../models/reserved-slot-dto';
 import { WorkPlaceDTO } from '../models/work-place-dto';
 
 /**
@@ -34,14 +37,16 @@ class CommandResourceService extends __BaseService {
   static readonly updateContactInfoUsingPUTPath = '/api/commands/contact-infos';
   static readonly deleteContactInfoUsingDELETEPath = '/api/commands/contact-infos/{id}';
   static readonly testUsingPOSTPath = '/api/commands/doc';
+  static readonly createDoctorSettingUsingPOSTPath = '/api/commands/doctorSettings';
   static readonly createDoctorUsingPOSTPath = '/api/commands/doctors';
   static readonly updateDoctorUsingPUTPath = '/api/commands/doctors';
   static readonly initiateUsingPOSTPath = '/api/commands/initiate-Consultation';
+  static readonly createPaymentSettingUsingPOSTPath = '/api/commands/paymentSettings';
+  static readonly getProcessAppointmentRequestUsingPOSTPath = '/api/commands/processAppointmentRequest/{taskId}';
   static readonly createQualificationUsingPOSTPath = '/api/commands/qualifications';
   static readonly updateQualificationUsingPUTPath = '/api/commands/qualifications';
-  static readonly deleteQualificationUsingDELETEPath = '/api/commands/qualifications';
+  static readonly deleteQualificationUsingDELETEPath = '/api/commands/qualifications/{id}';
   static readonly createSessionInfoUsingPOSTPath = '/api/commands/sessionInfo';
-  static readonly createSlotUsingPOSTPath = '/api/commands/slot/{date}/{doctorId}';
   static readonly uploadPrescriptionUsingPOSTPath = '/api/commands/upload-File';
   static readonly createWorkPlaceUsingPOSTPath = '/api/commands/work-places';
   static readonly updateWorkPlaceUsingPUTPath = '/api/commands/work-places';
@@ -366,6 +371,42 @@ class CommandResourceService extends __BaseService {
   }
 
   /**
+   * @param doctorSettingsDTO doctorSettingsDTO
+   * @return OK
+   */
+  createDoctorSettingUsingPOSTResponse(doctorSettingsDTO: DoctorSettingsDTO): __Observable<__StrictHttpResponse<DoctorSettingsDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = doctorSettingsDTO;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/commands/doctorSettings`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<DoctorSettingsDTO>;
+      })
+    );
+  }
+  /**
+   * @param doctorSettingsDTO doctorSettingsDTO
+   * @return OK
+   */
+  createDoctorSettingUsingPOST(doctorSettingsDTO: DoctorSettingsDTO): __Observable<DoctorSettingsDTO> {
+    return this.createDoctorSettingUsingPOSTResponse(doctorSettingsDTO).pipe(
+      __map(_r => _r.body as DoctorSettingsDTO)
+    );
+  }
+
+  /**
    * @param doctorDTO doctorDTO
    * @return OK
    */
@@ -474,6 +515,89 @@ class CommandResourceService extends __BaseService {
   }
 
   /**
+   * @param paymentSettingsDTO paymentSettingsDTO
+   * @return OK
+   */
+  createPaymentSettingUsingPOSTResponse(paymentSettingsDTO: PaymentSettingsDTO): __Observable<__StrictHttpResponse<PaymentSettingsDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = paymentSettingsDTO;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/commands/paymentSettings`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<PaymentSettingsDTO>;
+      })
+    );
+  }
+  /**
+   * @param paymentSettingsDTO paymentSettingsDTO
+   * @return OK
+   */
+  createPaymentSettingUsingPOST(paymentSettingsDTO: PaymentSettingsDTO): __Observable<PaymentSettingsDTO> {
+    return this.createPaymentSettingUsingPOSTResponse(paymentSettingsDTO).pipe(
+      __map(_r => _r.body as PaymentSettingsDTO)
+    );
+  }
+
+  /**
+   * @param params The `CommandResourceService.GetProcessAppointmentRequestUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `appointmentConfirmationResponse`: appointmentConfirmationResponse
+   *
+   * @return OK
+   */
+  getProcessAppointmentRequestUsingPOSTResponse(params: CommandResourceService.GetProcessAppointmentRequestUsingPOSTParams): __Observable<__StrictHttpResponse<CommandResource>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.appointmentConfirmationResponse;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/commands/processAppointmentRequest/${params.taskId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<CommandResource>;
+      })
+    );
+  }
+  /**
+   * @param params The `CommandResourceService.GetProcessAppointmentRequestUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `appointmentConfirmationResponse`: appointmentConfirmationResponse
+   *
+   * @return OK
+   */
+  getProcessAppointmentRequestUsingPOST(params: CommandResourceService.GetProcessAppointmentRequestUsingPOSTParams): __Observable<CommandResource> {
+    return this.getProcessAppointmentRequestUsingPOSTResponse(params).pipe(
+      __map(_r => _r.body as CommandResource)
+    );
+  }
+
+  /**
    * @param qualificationDTO qualificationDTO
    * @return OK
    */
@@ -555,7 +679,7 @@ class CommandResourceService extends __BaseService {
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/api/commands/qualifications`,
+      this.rootUrl + `/api/commands/qualifications/${id}`,
       __body,
       {
         headers: __headers,
@@ -623,53 +747,6 @@ class CommandResourceService extends __BaseService {
   createSessionInfoUsingPOST(params: CommandResourceService.CreateSessionInfoUsingPOSTParams): __Observable<Array<SessionInfoDTO>> {
     return this.createSessionInfoUsingPOSTResponse(params).pipe(
       __map(_r => _r.body as Array<SessionInfoDTO>)
-    );
-  }
-
-  /**
-   * @param params The `CommandResourceService.CreateSlotUsingPOSTParams` containing the following parameters:
-   *
-   * - `doctorId`: doctorId
-   *
-   * - `date`: date
-   *
-   * @return OK
-   */
-  createSlotUsingPOSTResponse(params: CommandResourceService.CreateSlotUsingPOSTParams): __Observable<__StrictHttpResponse<Array<ReservedSlotDTO>>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-
-
-    let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/api/commands/slot/${params.date}/${params.doctorId}`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<Array<ReservedSlotDTO>>;
-      })
-    );
-  }
-  /**
-   * @param params The `CommandResourceService.CreateSlotUsingPOSTParams` containing the following parameters:
-   *
-   * - `doctorId`: doctorId
-   *
-   * - `date`: date
-   *
-   * @return OK
-   */
-  createSlotUsingPOST(params: CommandResourceService.CreateSlotUsingPOSTParams): __Observable<Array<ReservedSlotDTO>> {
-    return this.createSlotUsingPOSTResponse(params).pipe(
-      __map(_r => _r.body as Array<ReservedSlotDTO>)
     );
   }
 
@@ -886,6 +963,22 @@ module CommandResourceService {
   }
 
   /**
+   * Parameters for getProcessAppointmentRequestUsingPOST
+   */
+  export interface GetProcessAppointmentRequestUsingPOSTParams {
+
+    /**
+     * taskId
+     */
+    taskId: string;
+
+    /**
+     * appointmentConfirmationResponse
+     */
+    appointmentConfirmationResponse: AppointmentConfirmationResponse;
+  }
+
+  /**
    * Parameters for createSessionInfoUsingPOST
    */
   export interface CreateSessionInfoUsingPOSTParams {
@@ -899,22 +992,6 @@ module CommandResourceService {
      * monthList
      */
     monthList: Array<number>;
-  }
-
-  /**
-   * Parameters for createSlotUsingPOST
-   */
-  export interface CreateSlotUsingPOSTParams {
-
-    /**
-     * doctorId
-     */
-    doctorId: number;
-
-    /**
-     * date
-     */
-    date: string;
   }
 }
 

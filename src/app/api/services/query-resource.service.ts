@@ -7,9 +7,11 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
+import { PageOfAppointment } from '../models/page-of-appointment';
 import { ContactInfoDTO } from '../models/contact-info-dto';
 import { DoctorDTO } from '../models/doctor-dto';
 import { WorkPlaceDTO } from '../models/work-place-dto';
+import { OpenAppointmentResponse } from '../models/open-appointment-response';
 import { QualificationDTO } from '../models/qualification-dto';
 import { PageOfReview } from '../models/page-of-review';
 import { SessionInfoDTO } from '../models/session-info-dto';
@@ -23,9 +25,11 @@ import { DataResponse } from '../models/data-response';
   providedIn: 'root',
 })
 class QueryResourceService extends __BaseService {
+  static readonly getAppointmentsByDoctorIdUsingGETPath = '/api/queries/appointments/{searchTerm}';
   static readonly findContactInfoUsingGETPath = '/api/queries/contact-infos/{searchTerm}';
   static readonly findDoctorUsingGETPath = '/api/queries/doctor/{searchTerm}';
   static readonly findAllWorkPlacesByDoctorIdUsingGETPath = '/api/queries/findworkplacesBydoctorId/{doctorId}';
+  static readonly getOpenAppointmentsUsingGETPath = '/api/queries/open-appointments';
   static readonly getPrescriptionAsPDFUsingGETPath = '/api/queries/prescription-as-pdf';
   static readonly findAllQualificationByDoctorIdUsingGETPath = '/api/queries/qualification/{doctorId}';
   static readonly findAllQualificationUsingGETPath = '/api/queries/qualifications/{searchTerm}';
@@ -42,6 +46,63 @@ class QueryResourceService extends __BaseService {
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  /**
+   * @param params The `QueryResourceService.GetAppointmentsByDoctorIdUsingGETParams` containing the following parameters:
+   *
+   * - `searchTerm`: searchTerm
+   *
+   * - `sort`: Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+   *
+   * - `size`: Size of a page
+   *
+   * - `page`: Page number of the requested page
+   *
+   * @return OK
+   */
+  getAppointmentsByDoctorIdUsingGETResponse(params: QueryResourceService.GetAppointmentsByDoctorIdUsingGETParams): __Observable<__StrictHttpResponse<PageOfAppointment>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    (params.sort || []).forEach(val => {if (val != null) __params = __params.append('sort', val.toString())});
+    if (params.size != null) __params = __params.set('size', params.size.toString());
+    if (params.page != null) __params = __params.set('page', params.page.toString());
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/api/queries/appointments/${params.searchTerm}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<PageOfAppointment>;
+      })
+    );
+  }
+  /**
+   * @param params The `QueryResourceService.GetAppointmentsByDoctorIdUsingGETParams` containing the following parameters:
+   *
+   * - `searchTerm`: searchTerm
+   *
+   * - `sort`: Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+   *
+   * - `size`: Size of a page
+   *
+   * - `page`: Page number of the requested page
+   *
+   * @return OK
+   */
+  getAppointmentsByDoctorIdUsingGET(params: QueryResourceService.GetAppointmentsByDoctorIdUsingGETParams): __Observable<PageOfAppointment> {
+    return this.getAppointmentsByDoctorIdUsingGETResponse(params).pipe(
+      __map(_r => _r.body as PageOfAppointment)
+    );
   }
 
   /**
@@ -153,9 +214,45 @@ class QueryResourceService extends __BaseService {
   }
 
   /**
+   * @param assignee assignee
    * @return OK
    */
-  getPrescriptionAsPDFUsingGETResponse(): __Observable<__StrictHttpResponse<unknown>> {
+  getOpenAppointmentsUsingGETResponse(assignee: string): __Observable<__StrictHttpResponse<Array<OpenAppointmentResponse>>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    if (assignee != null) __params = __params.set('assignee', assignee.toString());
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/api/queries/open-appointments`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<Array<OpenAppointmentResponse>>;
+      })
+    );
+  }
+  /**
+   * @param assignee assignee
+   * @return OK
+   */
+  getOpenAppointmentsUsingGET(assignee: string): __Observable<Array<OpenAppointmentResponse>> {
+    return this.getOpenAppointmentsUsingGETResponse(assignee).pipe(
+      __map(_r => _r.body as Array<OpenAppointmentResponse>)
+    );
+  }
+
+  /**
+   * @return OK
+   */
+  getPrescriptionAsPDFUsingGETResponse(): __Observable<__StrictHttpResponse<string>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -166,22 +263,22 @@ class QueryResourceService extends __BaseService {
       {
         headers: __headers,
         params: __params,
-        responseType: 'blob'
+        responseType: 'text'
       });
 
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<unknown>;
+        return _r as __StrictHttpResponse<string>;
       })
     );
   }
   /**
    * @return OK
    */
-  getPrescriptionAsPDFUsingGET(): __Observable<unknown> {
+  getPrescriptionAsPDFUsingGET(): __Observable<string> {
     return this.getPrescriptionAsPDFUsingGETResponse().pipe(
-      __map(_r => _r.body as Blob)
+      __map(_r => _r.body as string)
     );
   }
 
@@ -869,6 +966,32 @@ class QueryResourceService extends __BaseService {
 }
 
 module QueryResourceService {
+
+  /**
+   * Parameters for getAppointmentsByDoctorIdUsingGET
+   */
+  export interface GetAppointmentsByDoctorIdUsingGETParams {
+
+    /**
+     * searchTerm
+     */
+    searchTerm: string;
+
+    /**
+     * Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+     */
+    sort?: Array<string>;
+
+    /**
+     * Size of a page
+     */
+    size?: number;
+
+    /**
+     * Page number of the requested page
+     */
+    page?: number;
+  }
 
   /**
    * Parameters for findAllQualificationUsingGET
